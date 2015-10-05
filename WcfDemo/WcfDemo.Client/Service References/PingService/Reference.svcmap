@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f1080e31-c61c-4ef6-ad85-7aa5944405d2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:2350/PingService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="PingService1.xsd" MetadataType="Schema" ID="a8f60559-8abe-48dd-a877-544738d30bbf" SourceId="1" SourceUrl="http://localhost:2350/PingService.svc?xsd=xsd1" />
+    <MetadataFile FileName="PingService.xsd" MetadataType="Schema" ID="6f882bcb-851b-4bdd-a2ba-a93dba9227ad" SourceId="1" SourceUrl="http://localhost:2350/PingService.svc?xsd=xsd0" />
+    <MetadataFile FileName="PingService.disco" MetadataType="Disco" ID="9515f84c-cedc-4362-8bc1-784bd9a11e67" SourceId="1" SourceUrl="http://localhost:2350/PingService.svc?disco" />
+    <MetadataFile FileName="PingService11.xsd" MetadataType="Schema" ID="fb04ca65-2757-4be2-9de0-301b7079012c" SourceId="1" SourceUrl="http://localhost:2350/PingService.svc?xsd=xsd3" />
+    <MetadataFile FileName="PingService1.wsdl" MetadataType="Wsdl" ID="5edd66cd-d11c-42db-a992-92aecf9941d7" SourceId="1" SourceUrl="http://localhost:2350/PingService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="PingService.wsdl" MetadataType="Wsdl" ID="be94a388-d0c3-4e96-8705-9f1fbd1378cd" SourceId="1" SourceUrl="http://localhost:2350/PingService.svc?wsdl" />
+    <MetadataFile FileName="PingService12.xsd" MetadataType="Schema" ID="88e79a90-4954-4fa5-99b1-20d85cdd7aa1" SourceId="1" SourceUrl="http://localhost:2350/PingService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
