@@ -21,5 +21,11 @@ namespace WcfDemo.Contracts
 
         [OperationContract]
         void Throw();
+
+        [OperationContract]
+        void Put(Guid data);
+
+        [OperationContract]
+        Guid Get();
     }
 }

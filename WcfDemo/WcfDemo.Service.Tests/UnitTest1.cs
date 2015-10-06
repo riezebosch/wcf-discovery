@@ -96,5 +96,29 @@ namespace WcfDemo.Service.Tests
                 }
             }
         }
+
+        [TestMethod]
+        public void MakeSureInstanceContextModeIsPerCall()
+        {
+            var client = ChannelFactory<IService>.CreateChannel(
+                                       new NetNamedPipeBinding(),
+                                       new EndpointAddress("net.pipe://localhost/ping"));
+
+            try
+            {
+                var data = Guid.NewGuid();
+                client.Put(data);
+
+                var result = client.Get();
+                Assert.AreNotEqual(data, result);
+            }
+            finally
+            {
+                if (((ICommunicationObject)client).State == CommunicationState.Opened)
+                {
+                    ((ICommunicationObject)client).Close();
+                }
+            }
+        }
     }
 }

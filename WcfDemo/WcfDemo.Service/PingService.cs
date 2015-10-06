@@ -8,9 +8,16 @@ using WcfDemo.Contracts;
 
 namespace WcfDemo.Service
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession, IncludeExceptionDetailInFaults = true)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall, IncludeExceptionDetailInFaults = true)]
     public class PingService : IService
     {
+        private Guid _data;
+
+        public Guid Get()
+        {
+            return _data;
+        }
+
         public Dataz GiveMeAllTheDataz(Data data)
         {
             return new Dataz
@@ -28,6 +35,11 @@ namespace WcfDemo.Service
 
         public void Ping()
         {
+        }
+
+        public void Put(Guid data)
+        {
+            _data = data;
         }
 
         public void Throw()
