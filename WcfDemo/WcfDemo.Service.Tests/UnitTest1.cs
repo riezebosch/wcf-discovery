@@ -98,5 +98,12 @@ namespace WcfDemo.Service.Tests
             var result = client.Get();
             Assert.AreNotEqual(data, result);
         }
+
+        [TestMethod]
+        public void ValidateInstanceContextModeOnServiceHost()
+        {
+            Assert.AreEqual(InstanceContextMode.PerCall,
+                _host.Description.Behaviors.Find<ServiceBehaviorAttribute>().InstanceContextMode);
+        }
     }
 }
