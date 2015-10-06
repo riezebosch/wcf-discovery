@@ -3,7 +3,13 @@
   <xs:complexType name="Data">
     <xs:sequence>
       <xs:element minOccurs="0" name="ZId" type="xs:int" />
-      <xs:element minOccurs="0" name="Ignored" nillable="true" type="xs:string" />
+      <xs:element name="Ignored" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
       <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:decimal" />
     </xs:sequence>
   </xs:complexType>

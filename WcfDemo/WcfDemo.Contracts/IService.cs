@@ -18,5 +18,8 @@ namespace WcfDemo.Contracts
 
         [OperationContract]
         Dataz GiveMeAllTheDataz(Data data);
+
+        [OperationContract]
+        void Throw();
     }
 }

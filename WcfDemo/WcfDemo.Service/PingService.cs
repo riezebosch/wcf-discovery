@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Web;
 using WcfDemo.Contracts;
 
 
 namespace WcfDemo.Service
 {
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class PingService : IService
     {
         public Dataz GiveMeAllTheDataz(Data data)
@@ -26,6 +28,11 @@ namespace WcfDemo.Service
 
         public void Ping()
         {
+        }
+
+        public void Throw()
+        {
+            throw new InvalidOperationException("deze zou niet aangeroepen moeten mogen worden.");
         }
     }
 }

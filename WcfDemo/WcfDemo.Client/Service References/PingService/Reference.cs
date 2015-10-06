@@ -25,7 +25,6 @@ namespace WcfDemo.Client.PingService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int ZIdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string IgnoredField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -54,7 +53,7 @@ namespace WcfDemo.Client.PingService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, EmitDefaultValue=false, Order=1)]
         public string Ignored {
             get {
                 return this.IgnoredField;

@@ -8,29 +8,29 @@ namespace WcfDemo.Service.Tests
     [TestClass]
     public class UnitTest1
     {
+        static ServiceHost _host = new ServiceHost(typeof(PingService));
+
+        [ClassInitialize]
+        public static void Initialize(TestContext context)
+        {
+            _host.Open();
+        }
+
+        [ClassCleanup]
+        public static void Cleanup()
+        {
+            _host.Abort();
+        }
+
         [TestMethod]
         public void IntegratieTestDemoVanService()
         {
-            ServiceHost host = new ServiceHost(typeof(PingService));
-            //host.AddServiceEndpoint(typeof(IService),
-            //    new NetNamedPipeBinding(), 
-            //    "net.pipe://localhost/ping");
+            var client = ChannelFactory<IService>.CreateChannel(
+                new NetNamedPipeBinding(),
+                new EndpointAddress("net.pipe://localhost/ping"));
 
-            try
-            {
-                host.Open();
-
-                var client = ChannelFactory<IService>.CreateChannel(
-                    new NetNamedPipeBinding(), 
-                    new EndpointAddress("net.pipe://localhost/ping"));
-
-                var result = client.Hello("from a unit test");
-                Assert.AreEqual("Hello from a unit test", result);
-            }
-            finally
-            {
-                host.Abort();
-            }
+            var result = client.Hello("from a unit test");
+            Assert.AreEqual("Hello from a unit test", result);
         }
 
         [TestMethod]
@@ -45,24 +45,48 @@ namespace WcfDemo.Service.Tests
         [TestMethod]
         public void DemoVanFalendeIntegratieTestOmdatServiceNietConformWcfWerkt()
         {
-            ServiceHost host = new ServiceHost(typeof(PingService));
-            host.AddServiceEndpoint(typeof(IService),
+            var client = ChannelFactory<IService>.CreateChannel(
                 new NetNamedPipeBinding(),
-                "net.pipe://localhost/ping2");
+                new EndpointAddress("net.pipe://localhost/ping"));
 
             try
             {
-                host.Open();
-
-                var client = ChannelFactory<IService>.CreateChannel(
-                    new NetNamedPipeBinding(),
-                    new EndpointAddress("net.pipe://localhost/ping2"));
-
                 client.GiveMeAllTheDataz(new Data { Amount = 1, Ignored = "", ZId = 3 });
             }
             finally
             {
-                host.Abort();
+                if (((ICommunicationObject)client).State == CommunicationState.Opened)
+                {
+                    ((ICommunicationObject)client).Close();
+                }
+            }
+        }
+
+        [TestMethod]
+        public void ServiceThrowsException()
+        {
+            var client = ChannelFactory<IService>.CreateChannel(
+                           new NetNamedPipeBinding(),
+                           new EndpointAddress("net.pipe://localhost/ping"));
+
+            try
+            {
+                client.Throw();
+                Assert.Fail("tot zover komt de test niet.");
+            }
+            catch (FaultException ex)
+            {
+                StringAssert.Contains(ex.Message, "aangeroepen");
+                StringAssert.Contains(ex.Message, "moeten");
+                StringAssert.Contains(ex.Message, "mogen");
+                StringAssert.Contains(ex.Message, "worden");
+            }
+            finally
+            {
+                if (((ICommunicationObject)client).State == CommunicationState.Opened)
+                {
+                    ((ICommunicationObject)client).Close();
+                }
             }
         }
     }
