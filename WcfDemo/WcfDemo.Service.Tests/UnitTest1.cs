@@ -13,6 +13,13 @@ namespace WcfDemo.Service.Tests
         [ClassInitialize]
         public static void Initialize(TestContext context)
         {
+            // Dit is nu een beetje dubbelop, 
+            // want dit hebben we ook al in config staan.
+            _host
+                .Description
+                .Behaviors
+                .Find<ServiceBehaviorAttribute>()
+                .IncludeExceptionDetailInFaults = true;
             _host.Open();
         }
 

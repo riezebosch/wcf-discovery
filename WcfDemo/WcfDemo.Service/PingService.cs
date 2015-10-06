@@ -8,7 +8,7 @@ using WcfDemo.Contracts;
 
 namespace WcfDemo.Service
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession, IncludeExceptionDetailInFaults = true)]
     public class PingService : IService
     {
         public Dataz GiveMeAllTheDataz(Data data)
