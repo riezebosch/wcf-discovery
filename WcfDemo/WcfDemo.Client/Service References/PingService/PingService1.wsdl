@@ -5,7 +5,6 @@
       <xsd:import schemaLocation="http://localhost:2350/PingService.svc?xsd=xsd0" namespace="urn:www-infosupport-com:wcfdemo:v1" />
       <xsd:import schemaLocation="http://localhost:2350/PingService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:2350/PingService.svc?xsd=xsd2" namespace="urn:www-infosupport-com:wcfdemo:v1:datacontracts" />
-      <xsd:import schemaLocation="http://localhost:2350/PingService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ping-service_ping_InputMessage">

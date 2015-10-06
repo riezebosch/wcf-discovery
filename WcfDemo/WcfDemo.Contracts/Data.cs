@@ -8,7 +8,7 @@ namespace WcfDemo.Contracts
         [DataMember]
         public int ZId { get; set; }
 
-        [DataMember(Order = 25)]
+        [DataMember(Order = 25, EmitDefaultValue = false, IsRequired = true)]
         public string Ignored { get; set; }
 
         [DataMember(Order = 26, EmitDefaultValue = true, IsRequired = false)]

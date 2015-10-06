@@ -7,6 +7,6 @@ namespace WcfDemo.Contracts
     public class Dataz
     {
         [DataMember]
-        public List<int> Ids { get; set; }
+        public List<Data> Ids { get; set; }
     }
 }

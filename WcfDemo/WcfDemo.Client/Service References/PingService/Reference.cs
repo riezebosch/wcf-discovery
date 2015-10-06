@@ -100,7 +100,7 @@ namespace WcfDemo.Client.PingService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int[] IdsField;
+        private WcfDemo.Client.PingService.Data[] IdsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -113,7 +113,7 @@ namespace WcfDemo.Client.PingService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int[] Ids {
+        public WcfDemo.Client.PingService.Data[] Ids {
             get {
                 return this.IdsField;
             }

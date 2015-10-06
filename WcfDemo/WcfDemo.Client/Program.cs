@@ -13,6 +13,7 @@ namespace WcfDemo.Client
             PingService.pingservice client = new PingService.pingserviceClient();
             client.ping();
 
+            var dataz = client.GiveMeAllTheDataz(new PingService.Data { });
         }
     }
 }

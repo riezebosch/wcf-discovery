@@ -11,7 +11,12 @@ namespace WcfDemo.Service
     {
         public Dataz GiveMeAllTheDataz(Data data)
         {
-            return new Dataz { Ids = Enumerable.Repeat(0, 10).ToList() };
+            return new Dataz
+            {
+                Ids = Enumerable.Repeat(0, 10)
+                    .Select(i => new Data { ZId = i })
+                    .ToList()
+            };
         }
 
         public string Hello(string input)

@@ -63,9 +63,6 @@
     <None Include="Service References\PingService\PingService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\PingService\PingService11.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\PingService\PingService12.xsd">
       <SubType>Designer</SubType>
     </None>
