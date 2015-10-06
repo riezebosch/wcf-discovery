@@ -12,9 +12,9 @@ namespace WcfDemo.Service.Tests
         public void IntegratieTestDemoVanService()
         {
             ServiceHost host = new ServiceHost(typeof(PingService));
-            host.AddServiceEndpoint(typeof(IService),
-                new NetNamedPipeBinding(), 
-                "net.pipe://localhost/ping");
+            //host.AddServiceEndpoint(typeof(IService),
+            //    new NetNamedPipeBinding(), 
+            //    "net.pipe://localhost/ping");
 
             try
             {
@@ -48,7 +48,7 @@ namespace WcfDemo.Service.Tests
             ServiceHost host = new ServiceHost(typeof(PingService));
             host.AddServiceEndpoint(typeof(IService),
                 new NetNamedPipeBinding(),
-                "net.pipe://localhost/ping");
+                "net.pipe://localhost/ping2");
 
             try
             {
@@ -56,7 +56,7 @@ namespace WcfDemo.Service.Tests
 
                 var client = ChannelFactory<IService>.CreateChannel(
                     new NetNamedPipeBinding(),
-                    new EndpointAddress("net.pipe://localhost/ping"));
+                    new EndpointAddress("net.pipe://localhost/ping2"));
 
                 client.GiveMeAllTheDataz(new Data { Amount = 1, Ignored = "", ZId = 3 });
             }
