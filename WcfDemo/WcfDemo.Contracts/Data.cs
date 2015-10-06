@@ -2,7 +2,7 @@
 
 namespace WcfDemo.Contracts
 {
-    [DataContract]
+    [DataContract(Namespace = "urn:www-infosupport-com:wcfdemo:v1:datacontracts")]
     public class Data
     {
         [DataMember]

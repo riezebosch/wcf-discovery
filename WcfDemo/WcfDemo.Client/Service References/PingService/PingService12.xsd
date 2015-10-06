@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WcfDemo.Contracts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WcfDemo.Contracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:tns="urn:www-infosupport-com:wcfdemo:v1:datacontracts" elementFormDefault="qualified" targetNamespace="urn:www-infosupport-com:wcfdemo:v1:datacontracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:2350/PingService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:complexType name="Data">
     <xs:sequence>

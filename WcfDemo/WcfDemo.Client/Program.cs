@@ -10,8 +10,8 @@ namespace WcfDemo.Client
     {
         static void Main(string[] args)
         {
-            PingService.ServiceClient client = new PingService.ServiceClient();
-            client.Ping();
+            PingService.pingservice client = new PingService.pingserviceClient();
+            client.ping();
 
         }
     }

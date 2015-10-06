@@ -4,40 +4,40 @@
     <xsd:schema targetNamespace="urn:www-infosupport-com:wcfdemo:v1/Imports">
       <xsd:import schemaLocation="http://localhost:2350/PingService.svc?xsd=xsd0" namespace="urn:www-infosupport-com:wcfdemo:v1" />
       <xsd:import schemaLocation="http://localhost:2350/PingService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:2350/PingService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WcfDemo.Contracts" />
+      <xsd:import schemaLocation="http://localhost:2350/PingService.svc?xsd=xsd2" namespace="urn:www-infosupport-com:wcfdemo:v1:datacontracts" />
       <xsd:import schemaLocation="http://localhost:2350/PingService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IService_Ping_InputMessage">
-    <wsdl:part name="parameters" element="tns:Ping" />
+  <wsdl:message name="ping-service_ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:ping" />
   </wsdl:message>
-  <wsdl:message name="IService_Ping_OutputMessage">
-    <wsdl:part name="parameters" element="tns:PingResponse" />
+  <wsdl:message name="ping-service_ping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:pingResponse" />
   </wsdl:message>
-  <wsdl:message name="IService_Hello_InputMessage">
+  <wsdl:message name="ping-service_Hello_InputMessage">
     <wsdl:part name="parameters" element="tns:Hello" />
   </wsdl:message>
-  <wsdl:message name="IService_Hello_OutputMessage">
+  <wsdl:message name="ping-service_Hello_OutputMessage">
     <wsdl:part name="parameters" element="tns:HelloResponse" />
   </wsdl:message>
-  <wsdl:message name="IService_GiveMeAllTheDataz_InputMessage">
+  <wsdl:message name="ping-service_GiveMeAllTheDataz_InputMessage">
     <wsdl:part name="parameters" element="tns:GiveMeAllTheDataz" />
   </wsdl:message>
-  <wsdl:message name="IService_GiveMeAllTheDataz_OutputMessage">
+  <wsdl:message name="ping-service_GiveMeAllTheDataz_OutputMessage">
     <wsdl:part name="parameters" element="tns:GiveMeAllTheDatazResponse" />
   </wsdl:message>
-  <wsdl:portType name="IService">
-    <wsdl:operation name="Ping">
-      <wsdl:input wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/IService/Ping" message="tns:IService_Ping_InputMessage" />
-      <wsdl:output wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/IService/PingResponse" message="tns:IService_Ping_OutputMessage" />
+  <wsdl:portType name="ping-service">
+    <wsdl:operation name="ping">
+      <wsdl:input wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/ping" message="tns:ping-service_ping_InputMessage" />
+      <wsdl:output wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/pingResponse" message="tns:ping-service_ping_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Hello">
-      <wsdl:input wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/IService/Hello" message="tns:IService_Hello_InputMessage" />
-      <wsdl:output wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/IService/HelloResponse" message="tns:IService_Hello_OutputMessage" />
+      <wsdl:input wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Hello" message="tns:ping-service_Hello_InputMessage" />
+      <wsdl:output wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/HelloResponse" message="tns:ping-service_Hello_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GiveMeAllTheDataz">
-      <wsdl:input wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/IService/GiveMeAllTheDataz" message="tns:IService_GiveMeAllTheDataz_InputMessage" />
-      <wsdl:output wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/IService/GiveMeAllTheDatazResponse" message="tns:IService_GiveMeAllTheDataz_OutputMessage" />
+      <wsdl:input wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/GiveMeAllTheDataz" message="tns:ping-service_GiveMeAllTheDataz_InputMessage" />
+      <wsdl:output wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/GiveMeAllTheDatazResponse" message="tns:ping-service_GiveMeAllTheDataz_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

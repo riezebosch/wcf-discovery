@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="urn:www-infosupport-com:wcfdemo:v1" elementFormDefault="qualified" targetNamespace="urn:www-infosupport-com:wcfdemo:v1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:2350/PingService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WcfDemo.Contracts" />
-  <xs:element name="Ping">
+  <xs:import schemaLocation="http://localhost:2350/PingService.svc?xsd=xsd2" namespace="urn:www-infosupport-com:wcfdemo:v1:datacontracts" />
+  <xs:element name="ping">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="PingResponse">
+  <xs:element name="pingResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
@@ -28,14 +28,14 @@
   <xs:element name="GiveMeAllTheDataz">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/WcfDemo.Contracts" minOccurs="0" name="data" nillable="true" type="q1:Data" />
+        <xs:element xmlns:q1="urn:www-infosupport-com:wcfdemo:v1:datacontracts" minOccurs="0" name="data" nillable="true" type="q1:Data" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GiveMeAllTheDatazResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/WcfDemo.Contracts" minOccurs="0" name="GiveMeAllTheDatazResult" nillable="true" type="q2:Dataz" />
+        <xs:element xmlns:q2="urn:www-infosupport-com:wcfdemo:v1:datacontracts" minOccurs="0" name="GiveMeAllTheDatazResult" nillable="true" type="q2:Dataz" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

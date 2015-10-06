@@ -15,7 +15,7 @@ namespace WcfDemo.Client.PingService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Data", Namespace="http://schemas.datacontract.org/2004/07/WcfDemo.Contracts")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Data", Namespace="urn:www-infosupport-com:wcfdemo:v1:datacontracts")]
     [System.SerializableAttribute()]
     public partial class Data : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -92,7 +92,7 @@ namespace WcfDemo.Client.PingService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Dataz", Namespace="http://schemas.datacontract.org/2004/07/WcfDemo.Contracts")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Dataz", Namespace="urn:www-infosupport-com:wcfdemo:v1:datacontracts")]
     [System.SerializableAttribute()]
     public partial class Dataz : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -136,61 +136,61 @@ namespace WcfDemo.Client.PingService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="urn:www-infosupport-com:wcfdemo:v1", ConfigurationName="PingService.IService")]
-    public interface IService {
+    [System.ServiceModel.ServiceContractAttribute(Name="ping-service", Namespace="urn:www-infosupport-com:wcfdemo:v1", ConfigurationName="PingService.pingservice")]
+    public interface pingservice {
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/IService/Ping", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/IService/PingResponse")]
-        void Ping();
+        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/ping", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/pingResponse")]
+        void ping();
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/IService/Ping", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/IService/PingResponse")]
-        System.Threading.Tasks.Task PingAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/ping", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/pingResponse")]
+        System.Threading.Tasks.Task pingAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/IService/Hello", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/IService/HelloResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Hello", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/HelloResponse")]
         string Hello(string input);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/IService/Hello", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/IService/HelloResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Hello", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/HelloResponse")]
         System.Threading.Tasks.Task<string> HelloAsync(string input);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/IService/GiveMeAllTheDataz", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/IService/GiveMeAllTheDatazResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/GiveMeAllTheDataz", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/GiveMeAllTheDatazResponse")]
         WcfDemo.Client.PingService.Dataz GiveMeAllTheDataz(WcfDemo.Client.PingService.Data data);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/IService/GiveMeAllTheDataz", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/IService/GiveMeAllTheDatazResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/GiveMeAllTheDataz", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/GiveMeAllTheDatazResponse")]
         System.Threading.Tasks.Task<WcfDemo.Client.PingService.Dataz> GiveMeAllTheDatazAsync(WcfDemo.Client.PingService.Data data);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceChannel : WcfDemo.Client.PingService.IService, System.ServiceModel.IClientChannel {
+    public interface pingserviceChannel : WcfDemo.Client.PingService.pingservice, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceClient : System.ServiceModel.ClientBase<WcfDemo.Client.PingService.IService>, WcfDemo.Client.PingService.IService {
+    public partial class pingserviceClient : System.ServiceModel.ClientBase<WcfDemo.Client.PingService.pingservice>, WcfDemo.Client.PingService.pingservice {
         
-        public ServiceClient() {
+        public pingserviceClient() {
         }
         
-        public ServiceClient(string endpointConfigurationName) : 
+        public pingserviceClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public ServiceClient(string endpointConfigurationName, string remoteAddress) : 
+        public pingserviceClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public pingserviceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public pingserviceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public void Ping() {
-            base.Channel.Ping();
+        public void ping() {
+            base.Channel.ping();
         }
         
-        public System.Threading.Tasks.Task PingAsync() {
-            return base.Channel.PingAsync();
+        public System.Threading.Tasks.Task pingAsync() {
+            return base.Channel.pingAsync();
         }
         
         public string Hello(string input) {

@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace WcfDemo.Contracts
 {
-    [ServiceContract(Namespace = "urn:www-infosupport-com:wcfdemo:v1")]
+    [ServiceContract(Namespace = "urn:www-infosupport-com:wcfdemo:v1", Name = "ping-service")]
     public interface IService
     {
-        [OperationContract]
+        [OperationContract(Name = "ping")]
         void Ping();
 
         [OperationContract]
