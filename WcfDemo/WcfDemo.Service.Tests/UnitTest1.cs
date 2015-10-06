@@ -29,12 +29,28 @@ namespace WcfDemo.Service.Tests
             _host.Abort();
         }
 
+        IService client;
+
+        [TestInitialize]
+        public void TestInit()
+        {
+            client = ChannelFactory<IService>.CreateChannel(
+                new NetNamedPipeBinding(),
+                new EndpointAddress("net.pipe://localhost/ping"));
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            if (((ICommunicationObject)client).State == CommunicationState.Opened)
+            {
+                ((ICommunicationObject)client).Close();
+            }
+        }
+
         [TestMethod]
         public void IntegratieTestDemoVanService()
         {
-            var client = ChannelFactory<IService>.CreateChannel(
-                new NetNamedPipeBinding(),
-                new EndpointAddress("net.pipe://localhost/ping"));
 
             var result = client.Hello("from a unit test");
             Assert.AreEqual("Hello from a unit test", result);
@@ -50,32 +66,15 @@ namespace WcfDemo.Service.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(CommunicationException))]
         public void DemoVanFalendeIntegratieTestOmdatServiceNietConformWcfWerkt()
         {
-            var client = ChannelFactory<IService>.CreateChannel(
-                new NetNamedPipeBinding(),
-                new EndpointAddress("net.pipe://localhost/ping"));
-
-            try
-            {
-                client.GiveMeAllTheDataz(new Data { Amount = 1, Ignored = "", ZId = 3 });
-            }
-            finally
-            {
-                if (((ICommunicationObject)client).State == CommunicationState.Opened)
-                {
-                    ((ICommunicationObject)client).Close();
-                }
-            }
+            client.GiveMeAllTheDataz(new Data { Amount = 1, Ignored = "", ZId = 3 });
         }
 
         [TestMethod]
         public void ServiceThrowsException()
         {
-            var client = ChannelFactory<IService>.CreateChannel(
-                           new NetNamedPipeBinding(),
-                           new EndpointAddress("net.pipe://localhost/ping"));
-
             try
             {
                 client.Throw();
@@ -88,37 +87,16 @@ namespace WcfDemo.Service.Tests
                 StringAssert.Contains(ex.Message, "mogen");
                 StringAssert.Contains(ex.Message, "worden");
             }
-            finally
-            {
-                if (((ICommunicationObject)client).State == CommunicationState.Opened)
-                {
-                    ((ICommunicationObject)client).Close();
-                }
-            }
         }
 
         [TestMethod]
         public void MakeSureInstanceContextModeIsPerCall()
         {
-            var client = ChannelFactory<IService>.CreateChannel(
-                                       new NetNamedPipeBinding(),
-                                       new EndpointAddress("net.pipe://localhost/ping"));
+            var data = Guid.NewGuid();
+            client.Put(data);
 
-            try
-            {
-                var data = Guid.NewGuid();
-                client.Put(data);
-
-                var result = client.Get();
-                Assert.AreNotEqual(data, result);
-            }
-            finally
-            {
-                if (((ICommunicationObject)client).State == CommunicationState.Opened)
-                {
-                    ((ICommunicationObject)client).Close();
-                }
-            }
+            var result = client.Get();
+            Assert.AreNotEqual(data, result);
         }
     }
 }
