@@ -48,6 +48,10 @@ namespace WcfDemo.Service
             _data = data;
         }
 
+        public void Save(Persoon p)
+        {
+        }
+
         public void Slow()
         {
             Thread.Sleep(10 * 1000);

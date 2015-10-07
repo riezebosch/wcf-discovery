@@ -42,5 +42,8 @@ namespace WcfDemo.Contracts
 
         [OperationContract(IsOneWay = true)]
         void StartProcessing();
+
+        [OperationContract]
+        void Save(Persoon p);
     }
 }

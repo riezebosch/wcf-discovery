@@ -158,5 +158,12 @@ namespace WcfDemo.Service.Tests
 
             Assert.AreEqual(100, callback.Progress);
         }
+
+        [TestMethod]
+        public void InheritanceInDataContracts()
+        {
+            Persoon p = new Student { Naam = "Pietje", StudentNummer = 213 };
+            client.Save(p);
+        }
     }
 }
