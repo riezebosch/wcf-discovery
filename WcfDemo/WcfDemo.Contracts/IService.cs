@@ -27,5 +27,9 @@ namespace WcfDemo.Contracts
 
         [OperationContract]
         Guid Get();
+
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultDetails))]
+        void ThrowCustomException();
     }
 }

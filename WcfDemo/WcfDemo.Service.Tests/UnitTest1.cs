@@ -105,5 +105,19 @@ namespace WcfDemo.Service.Tests
             Assert.AreEqual(InstanceContextMode.PerCall,
                 _host.Description.Behaviors.Find<ServiceBehaviorAttribute>().InstanceContextMode);
         }
+
+        [TestMethod]
+        public void EenFoutmeldingVanuitDeServiceDoorsturenNaarDeClient()
+        {
+            try
+            {
+                client.ThrowCustomException();
+                Assert.Fail("dit punt had niet bereikt mogen worden.");
+            }
+            catch (FaultException<CustomFaultDetails> ex)
+            {
+                StringAssert.Contains(ex.Detail.Bericht, "dat mag dus niet");
+            }
+        }
     }
 }

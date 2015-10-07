@@ -46,5 +46,14 @@ namespace WcfDemo.Service
         {
             throw new InvalidOperationException("deze zou niet aangeroepen moeten mogen worden.");
         }
+
+        public void ThrowCustomException()
+        {
+            throw new FaultException<CustomFaultDetails>(
+                new CustomFaultDetails
+                {
+                    Bericht = "dat mag dus niet"
+                });
+        }
     }
 }
