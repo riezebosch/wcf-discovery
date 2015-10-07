@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.ServiceModel;
 using DiscoveryDemo.Contract;
+using System.ServiceModel.Discovery;
 
 namespace DiscoveryDemo.Service.Tests
 {
@@ -26,14 +27,6 @@ namespace DiscoveryDemo.Service.Tests
 
         IMagicOracle client;
 
-        [TestInitialize]
-        public void TestInit()
-        {
-            var factory = new ChannelFactory<IMagicOracle>(
-                new NetNamedPipeBinding());
-            client = factory.CreateChannel();
-        }
-
         [TestCleanup]
         public void TestCleanup()
         {
@@ -54,9 +47,23 @@ namespace DiscoveryDemo.Service.Tests
                 }
             }
         }
+
         [TestMethod]
         public void TestMethod1()
         {
+            var disco = new DiscoveryClient(new UdpDiscoveryEndpoint());
+            var response = disco.Find(
+                new FindCriteria(typeof(IMagicOracle))
+                {
+                    Duration = TimeSpan.FromSeconds(2)
+                });
+
+            Assert.AreNotEqual(0, response.Endpoints.Count);
+
+            client = ChannelFactory<IMagicOracle>.CreateChannel(
+                new NetNamedPipeBinding(),
+                response.Endpoints[0].Address);
+
             var result = client.Answer("Hoe laat is het?");
             Console.WriteLine(result);
         }

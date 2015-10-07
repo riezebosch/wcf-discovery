@@ -8,7 +8,8 @@ namespace DiscoveryDemo.Service
 {
     public class MagicOracleService : IMagicOracle
     {
-        static string[] _answers = { "Het is tijd",
+        static string[] _answers = {
+            "Het is tijd",
             "Je mag naar huis",
             "Kruisboog 42",
             "Git is the best",
