@@ -62,6 +62,12 @@
   <wsdl:message name="CustomReturnEnvelope">
     <wsdl:part name="parameters" element="tns:CustomReturnEnvelope" />
   </wsdl:message>
+  <wsdl:message name="ping-service_Slow_InputMessage">
+    <wsdl:part name="parameters" element="tns:Slow" />
+  </wsdl:message>
+  <wsdl:message name="ping-service_Slow_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SlowResponse" />
+  </wsdl:message>
   <wsdl:portType name="ping-service">
     <wsdl:operation name="ping">
       <wsdl:input wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/ping" message="tns:ping-service_ping_InputMessage" />
@@ -95,6 +101,10 @@
     <wsdl:operation name="OperationWithCustomEnvelope">
       <wsdl:input wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/OperationWithCustomEnvelope" name="CustomEnvelope" message="tns:CustomEnvelope" />
       <wsdl:output wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/OperationWithCustomEnvelopeResponse" name="CustomReturnEnvelope" message="tns:CustomReturnEnvelope" />
+    </wsdl:operation>
+    <wsdl:operation name="Slow">
+      <wsdl:input wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Slow" message="tns:ping-service_Slow_InputMessage" />
+      <wsdl:output wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/SlowResponse" message="tns:ping-service_Slow_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

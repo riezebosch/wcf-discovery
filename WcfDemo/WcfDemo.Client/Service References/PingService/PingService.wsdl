@@ -80,6 +80,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="Slow">
+      <soap:operation soapAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/Slow" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="PingService">
     <wsdl:port name="BasicHttpBinding_ping-service" binding="tns:BasicHttpBinding_ping-service">

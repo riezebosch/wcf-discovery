@@ -235,6 +235,12 @@ namespace WcfDemo.Client.PingService {
         [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/OperationWithCustomEnvelope", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/OperationWithCustomEnvelopeRespon" +
             "se")]
         System.Threading.Tasks.Task<WcfDemo.Client.PingService.CustomReturnEnvelope> OperationWithCustomEnvelopeAsync(WcfDemo.Client.PingService.CustomEnvelope request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Slow", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/SlowResponse")]
+        void Slow();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Slow", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/SlowResponse")]
+        System.Threading.Tasks.Task SlowAsync();
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -373,6 +379,14 @@ namespace WcfDemo.Client.PingService {
             inValue.Value = Value;
             inValue.Description = Description;
             return ((WcfDemo.Client.PingService.pingservice)(this)).OperationWithCustomEnvelopeAsync(inValue);
+        }
+        
+        public void Slow() {
+            base.Channel.Slow();
+        }
+        
+        public System.Threading.Tasks.Task SlowAsync() {
+            return base.Channel.SlowAsync();
         }
     }
 }

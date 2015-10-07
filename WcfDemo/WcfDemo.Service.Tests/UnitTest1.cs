@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.ServiceModel;
 using WcfDemo.Contracts;
+using System.Diagnostics;
 
 namespace WcfDemo.Service.Tests
 {
@@ -118,6 +119,15 @@ namespace WcfDemo.Service.Tests
             {
                 StringAssert.Contains(ex.Detail.Bericht, "dat mag dus niet");
             }
+        }
+
+        [TestMethod]
+        public void OneWayMessagePatternIsNotBlocking()
+        {
+            Stopwatch sw = Stopwatch.StartNew();
+            client.Slow();
+
+            Assert.IsTrue(sw.Elapsed < TimeSpan.FromSeconds(1));
         }
     }
 }

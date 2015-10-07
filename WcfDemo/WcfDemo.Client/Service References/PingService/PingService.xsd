@@ -97,4 +97,14 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="Slow">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SlowResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

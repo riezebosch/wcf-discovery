@@ -34,5 +34,8 @@ namespace WcfDemo.Contracts
 
         [OperationContract]
         CustomReturnEnvelope OperationWithCustomEnvelope(CustomEnvelope envelope);
+
+        [OperationContract(IsOneWay = true)]
+        void Slow();
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.Threading;
 using System.Web;
 using WcfDemo.Contracts;
 
@@ -45,6 +46,11 @@ namespace WcfDemo.Service
         public void Put(Guid data)
         {
             _data = data;
+        }
+
+        public void Slow()
+        {
+            Thread.Sleep(10 * 1000);
         }
 
         public void Throw()
