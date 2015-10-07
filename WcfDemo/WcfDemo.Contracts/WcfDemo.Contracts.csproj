@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="CustomEnvelope.cs" />
     <Compile Include="CustomFaultDetails.cs" />
     <Compile Include="CustomReturnEnvelope.cs" />

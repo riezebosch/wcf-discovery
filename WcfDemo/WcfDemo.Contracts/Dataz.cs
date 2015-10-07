@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace WcfDemo.Contracts
 {
-    [DataContract(Namespace = "urn:www-infosupport-com:wcfdemo:v1:datacontracts")]
+    [DataContract(Namespace = Constants.Namespace)]
     public class Dataz
     {
         [DataMember]
