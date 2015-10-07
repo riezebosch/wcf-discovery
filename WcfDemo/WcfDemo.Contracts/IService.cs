@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace WcfDemo.Contracts
 {
-    [ServiceContract(Namespace = "urn:www-infosupport-com:wcfdemo:v1", Name = "ping-service")]
+    [ServiceContract(Namespace = "urn:www-infosupport-com:wcfdemo:v1", 
+        Name = "ping-service", 
+        CallbackContract = typeof(IServiceCallback))]
     public interface IService
     {
         [OperationContract(Name = "ping")]
@@ -37,5 +39,8 @@ namespace WcfDemo.Contracts
 
         [OperationContract(IsOneWay = true)]
         void Slow();
+
+        [OperationContract(IsOneWay = true)]
+        void StartProcessing();
     }
 }

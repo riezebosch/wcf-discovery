@@ -65,8 +65,11 @@
   <wsdl:message name="ping-service_Slow_InputMessage">
     <wsdl:part name="parameters" element="tns:Slow" />
   </wsdl:message>
-  <wsdl:message name="ping-service_Slow_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SlowResponse" />
+  <wsdl:message name="ping-service_StartProcessing_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartProcessing" />
+  </wsdl:message>
+  <wsdl:message name="ping-service_Update_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:Update" />
   </wsdl:message>
   <wsdl:portType name="ping-service">
     <wsdl:operation name="ping">
@@ -104,7 +107,12 @@
     </wsdl:operation>
     <wsdl:operation name="Slow">
       <wsdl:input wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Slow" message="tns:ping-service_Slow_InputMessage" />
-      <wsdl:output wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/SlowResponse" message="tns:ping-service_Slow_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StartProcessing">
+      <wsdl:input wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/StartProcessing" message="tns:ping-service_StartProcessing_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:output wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Update" message="tns:ping-service_Update_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

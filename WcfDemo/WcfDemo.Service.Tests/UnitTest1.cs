@@ -31,21 +31,38 @@ namespace WcfDemo.Service.Tests
         }
 
         IService client;
+        ClientUpdateCallback callback;
 
         [TestInitialize]
         public void TestInit()
         {
-            client = ChannelFactory<IService>.CreateChannel(
+            callback = new ClientUpdateCallback();
+            var factory = new DuplexChannelFactory<IService>(callback,
                 new NetNamedPipeBinding(),
                 new EndpointAddress("net.pipe://localhost/ping"));
+            client = factory.CreateChannel();
         }
 
         [TestCleanup]
         public void TestCleanup()
         {
-            if (((ICommunicationObject)client).State == CommunicationState.Opened)
+            callback.Dispose();
+
+            ICommunicationObject co = (ICommunicationObject)client;
+            if (co.State == CommunicationState.Opened)
             {
-                ((ICommunicationObject)client).Close();
+                try
+                {
+                    co.Close();
+                }
+                catch (CommunicationException)
+                {
+                    co.Abort();
+                }
+                catch(TimeoutException)
+                {
+                    co.Abort();
+                }
             }
         }
 
@@ -128,6 +145,18 @@ namespace WcfDemo.Service.Tests
             client.Slow();
 
             Assert.IsTrue(sw.Elapsed < TimeSpan.FromSeconds(1));
+        }
+
+        [TestMethod]
+        [Timeout(15000)]
+        public void DuplexMessagePatternDemoReceiveUpdatesFromService()
+        {
+            client.StartProcessing();
+
+            // Wait for the service to finish.
+            callback.Wait();
+
+            Assert.AreEqual(100, callback.Progress);
         }
     }
 }

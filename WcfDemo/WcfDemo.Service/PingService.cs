@@ -53,6 +53,21 @@ namespace WcfDemo.Service
             Thread.Sleep(10 * 1000);
         }
 
+        public void StartProcessing()
+        {
+            var callback = OperationContext
+                .Current
+                .GetCallbackChannel<IServiceCallback>();
+
+            for (int i = 0; i <= 100; i += 5)
+            {
+                callback.Update(i);
+                Thread.Sleep(100);
+            }
+
+            callback.Ready();
+        }
+
         public void Throw()
         {
             throw new InvalidOperationException("deze zou niet aangeroepen moeten mogen worden.");

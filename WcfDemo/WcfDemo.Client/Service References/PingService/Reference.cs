@@ -180,7 +180,7 @@ namespace WcfDemo.Client.PingService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Name="ping-service", Namespace="urn:www-infosupport-com:wcfdemo:v1", ConfigurationName="PingService.pingservice")]
+    [System.ServiceModel.ServiceContractAttribute(Name="ping-service", Namespace="urn:www-infosupport-com:wcfdemo:v1", ConfigurationName="PingService.pingservice", CallbackContract=typeof(WcfDemo.Client.PingService.pingserviceCallback))]
     public interface pingservice {
         
         [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/ping", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/pingResponse")]
@@ -236,11 +236,24 @@ namespace WcfDemo.Client.PingService {
             "se")]
         System.Threading.Tasks.Task<WcfDemo.Client.PingService.CustomReturnEnvelope> OperationWithCustomEnvelopeAsync(WcfDemo.Client.PingService.CustomEnvelope request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Slow", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/SlowResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Slow")]
         void Slow();
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Slow", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/SlowResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Slow")]
         System.Threading.Tasks.Task SlowAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/StartProcessing")]
+        void StartProcessing();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/StartProcessing")]
+        System.Threading.Tasks.Task StartProcessingAsync();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface pingserviceCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Update")]
+        void Update(int i);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -280,25 +293,26 @@ namespace WcfDemo.Client.PingService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class pingserviceClient : System.ServiceModel.ClientBase<WcfDemo.Client.PingService.pingservice>, WcfDemo.Client.PingService.pingservice {
+    public partial class pingserviceClient : System.ServiceModel.DuplexClientBase<WcfDemo.Client.PingService.pingservice>, WcfDemo.Client.PingService.pingservice {
         
-        public pingserviceClient() {
+        public pingserviceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
         }
         
-        public pingserviceClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
+        public pingserviceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
         }
         
-        public pingserviceClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public pingserviceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public pingserviceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public pingserviceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public pingserviceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
+        public pingserviceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
         }
         
         public void ping() {
@@ -387,6 +401,14 @@ namespace WcfDemo.Client.PingService {
         
         public System.Threading.Tasks.Task SlowAsync() {
             return base.Channel.SlowAsync();
+        }
+        
+        public void StartProcessing() {
+            base.Channel.StartProcessing();
+        }
+        
+        public System.Threading.Tasks.Task StartProcessingAsync() {
+            return base.Channel.StartProcessingAsync();
         }
     }
 }
