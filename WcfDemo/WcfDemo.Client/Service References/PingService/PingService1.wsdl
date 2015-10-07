@@ -5,6 +5,7 @@
       <xsd:import schemaLocation="http://localhost:2350/PingService.svc?xsd=xsd0" namespace="urn:www-infosupport-com:wcfdemo:v1" />
       <xsd:import schemaLocation="http://localhost:2350/PingService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:2350/PingService.svc?xsd=xsd2" namespace="urn:www-infosupport-com:wcfdemo:v1:datacontracts" />
+      <xsd:import schemaLocation="http://localhost:2350/PingService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/WcfDemo.Contracts" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ping-service_ping_InputMessage">
@@ -25,6 +26,42 @@
   <wsdl:message name="ping-service_GiveMeAllTheDataz_OutputMessage">
     <wsdl:part name="parameters" element="tns:GiveMeAllTheDatazResponse" />
   </wsdl:message>
+  <wsdl:message name="ping-service_Throw_InputMessage">
+    <wsdl:part name="parameters" element="tns:Throw" />
+  </wsdl:message>
+  <wsdl:message name="ping-service_Throw_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ThrowResponse" />
+  </wsdl:message>
+  <wsdl:message name="ping-service_Put_InputMessage">
+    <wsdl:part name="parameters" element="tns:Put" />
+  </wsdl:message>
+  <wsdl:message name="ping-service_Put_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PutResponse" />
+  </wsdl:message>
+  <wsdl:message name="ping-service_Get_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get" />
+  </wsdl:message>
+  <wsdl:message name="ping-service_Get_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetResponse" />
+  </wsdl:message>
+  <wsdl:message name="ping-service_ThrowCustomException_InputMessage">
+    <wsdl:part name="parameters" element="tns:ThrowCustomException" />
+  </wsdl:message>
+  <wsdl:message name="ping-service_ThrowCustomException_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ThrowCustomExceptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ping-service_ThrowCustomException_CustomFaultDetailsFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/WcfDemo.Contracts" name="detail" element="q1:CustomFaultDetails" />
+  </wsdl:message>
+  <wsdl:message name="CustomEnvelope">
+    <wsdl:part name="parameters" element="tns:CustomEnvelope" />
+  </wsdl:message>
+  <wsdl:message name="CustomEnvelope_Headers">
+    <wsdl:part name="Value" element="tns:Value" />
+  </wsdl:message>
+  <wsdl:message name="CustomReturnEnvelope">
+    <wsdl:part name="parameters" element="tns:CustomReturnEnvelope" />
+  </wsdl:message>
   <wsdl:portType name="ping-service">
     <wsdl:operation name="ping">
       <wsdl:input wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/ping" message="tns:ping-service_ping_InputMessage" />
@@ -37,6 +74,27 @@
     <wsdl:operation name="GiveMeAllTheDataz">
       <wsdl:input wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/GiveMeAllTheDataz" message="tns:ping-service_GiveMeAllTheDataz_InputMessage" />
       <wsdl:output wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/GiveMeAllTheDatazResponse" message="tns:ping-service_GiveMeAllTheDataz_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Throw">
+      <wsdl:input wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Throw" message="tns:ping-service_Throw_InputMessage" />
+      <wsdl:output wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/ThrowResponse" message="tns:ping-service_Throw_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Put">
+      <wsdl:input wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Put" message="tns:ping-service_Put_InputMessage" />
+      <wsdl:output wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/PutResponse" message="tns:ping-service_Put_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <wsdl:input wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Get" message="tns:ping-service_Get_InputMessage" />
+      <wsdl:output wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/GetResponse" message="tns:ping-service_Get_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ThrowCustomException">
+      <wsdl:input wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/ThrowCustomException" message="tns:ping-service_ThrowCustomException_InputMessage" />
+      <wsdl:output wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/ThrowCustomExceptionResponse" message="tns:ping-service_ThrowCustomException_OutputMessage" />
+      <wsdl:fault wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/ThrowCustomExceptionCustomFaultDetailsFault" name="CustomFaultDetailsFault" message="tns:ping-service_ThrowCustomException_CustomFaultDetailsFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OperationWithCustomEnvelope">
+      <wsdl:input wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/OperationWithCustomEnvelope" name="CustomEnvelope" message="tns:CustomEnvelope" />
+      <wsdl:output wsaw:Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/OperationWithCustomEnvelopeResponse" name="CustomReturnEnvelope" message="tns:CustomReturnEnvelope" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

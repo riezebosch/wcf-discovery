@@ -25,6 +25,7 @@
     <MetadataFile FileName="PingService1.xsd" MetadataType="Schema" ID="a8f60559-8abe-48dd-a877-544738d30bbf" SourceId="1" SourceUrl="http://localhost:2350/PingService.svc?xsd=xsd1" />
     <MetadataFile FileName="PingService.xsd" MetadataType="Schema" ID="6f882bcb-851b-4bdd-a2ba-a93dba9227ad" SourceId="1" SourceUrl="http://localhost:2350/PingService.svc?xsd=xsd0" />
     <MetadataFile FileName="PingService.disco" MetadataType="Disco" ID="9515f84c-cedc-4362-8bc1-784bd9a11e67" SourceId="1" SourceUrl="http://localhost:2350/PingService.svc?disco" />
+    <MetadataFile FileName="PingService2.xsd" MetadataType="Schema" ID="c88115a0-3435-4508-9735-f9c3b9e4d5f4" SourceId="1" SourceUrl="http://localhost:2350/PingService.svc?xsd=xsd3" />
     <MetadataFile FileName="PingService1.wsdl" MetadataType="Wsdl" ID="5edd66cd-d11c-42db-a992-92aecf9941d7" SourceId="1" SourceUrl="http://localhost:2350/PingService.svc?wsdl=wsdl0" />
     <MetadataFile FileName="PingService.wsdl" MetadataType="Wsdl" ID="be94a388-d0c3-4e96-8705-9f1fbd1378cd" SourceId="1" SourceUrl="http://localhost:2350/PingService.svc?wsdl" />
     <MetadataFile FileName="PingService12.xsd" MetadataType="Schema" ID="88e79a90-4954-4fa5-99b1-20d85cdd7aa1" SourceId="1" SourceUrl="http://localhost:2350/PingService.svc?xsd=xsd2" />

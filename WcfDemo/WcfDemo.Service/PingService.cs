@@ -33,6 +33,11 @@ namespace WcfDemo.Service
             return $"Hello {input}";
         }
 
+        public CustomReturnEnvelope OperationWithCustomEnvelope(CustomEnvelope envelope)
+        {
+            return new CustomReturnEnvelope();
+        }
+
         public void Ping()
         {
         }

@@ -31,6 +31,55 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="Throw">
+      <soap:operation soapAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/Throw" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Put">
+      <soap:operation soapAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/Put" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <soap:operation soapAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/Get" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ThrowCustomException">
+      <soap:operation soapAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/ThrowCustomException" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultDetailsFault">
+        <soap:fault use="literal" name="CustomFaultDetailsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="OperationWithCustomEnvelope">
+      <soap:operation soapAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/OperationWithCustomEnvelope" style="document" />
+      <wsdl:input name="CustomEnvelope">
+        <soap:header message="i0:CustomEnvelope_Headers" part="Value" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CustomReturnEnvelope">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="PingService">
     <wsdl:port name="BasicHttpBinding_ping-service" binding="tns:BasicHttpBinding_ping-service">

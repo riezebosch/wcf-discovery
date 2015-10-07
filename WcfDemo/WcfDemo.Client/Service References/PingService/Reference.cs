@@ -134,6 +134,51 @@ namespace WcfDemo.Client.PingService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CustomFaultDetails", Namespace="http://schemas.datacontract.org/2004/07/WcfDemo.Contracts")]
+    [System.SerializableAttribute()]
+    public partial class CustomFaultDetails : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BerichtField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Bericht {
+            get {
+                return this.BerichtField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BerichtField, value) != true)) {
+                    this.BerichtField = value;
+                    this.RaisePropertyChanged("Bericht");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Name="ping-service", Namespace="urn:www-infosupport-com:wcfdemo:v1", ConfigurationName="PingService.pingservice")]
     public interface pingservice {
@@ -155,6 +200,72 @@ namespace WcfDemo.Client.PingService {
         
         [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/GiveMeAllTheDataz", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/GiveMeAllTheDatazResponse")]
         System.Threading.Tasks.Task<WcfDemo.Client.PingService.Dataz> GiveMeAllTheDatazAsync(WcfDemo.Client.PingService.Data data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Throw", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/ThrowResponse")]
+        void Throw();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Throw", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/ThrowResponse")]
+        System.Threading.Tasks.Task ThrowAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Put", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/PutResponse")]
+        void Put(System.Guid data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Put", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/PutResponse")]
+        System.Threading.Tasks.Task PutAsync(System.Guid data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Get", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/GetResponse")]
+        System.Guid Get();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/Get", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/GetResponse")]
+        System.Threading.Tasks.Task<System.Guid> GetAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/ThrowCustomException", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/ThrowCustomExceptionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(WcfDemo.Client.PingService.CustomFaultDetails), Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/ThrowCustomExceptionCustomFaultDe" +
+            "tailsFault", Name="CustomFaultDetails", Namespace="http://schemas.datacontract.org/2004/07/WcfDemo.Contracts")]
+        void ThrowCustomException();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/ThrowCustomException", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/ThrowCustomExceptionResponse")]
+        System.Threading.Tasks.Task ThrowCustomExceptionAsync();
+        
+        // CODEGEN: Generating message contract since the wrapper name (CustomEnvelope) of message CustomEnvelope does not match the default value (OperationWithCustomEnvelope)
+        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/OperationWithCustomEnvelope", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/OperationWithCustomEnvelopeRespon" +
+            "se")]
+        WcfDemo.Client.PingService.CustomReturnEnvelope OperationWithCustomEnvelope(WcfDemo.Client.PingService.CustomEnvelope request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:www-infosupport-com:wcfdemo:v1/ping-service/OperationWithCustomEnvelope", ReplyAction="urn:www-infosupport-com:wcfdemo:v1/ping-service/OperationWithCustomEnvelopeRespon" +
+            "se")]
+        System.Threading.Tasks.Task<WcfDemo.Client.PingService.CustomReturnEnvelope> OperationWithCustomEnvelopeAsync(WcfDemo.Client.PingService.CustomEnvelope request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CustomEnvelope", WrapperNamespace="urn:www-infosupport-com:wcfdemo:v1", IsWrapped=true)]
+    public partial class CustomEnvelope {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="urn:www-infosupport-com:wcfdemo:v1")]
+        public int Value;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:www-infosupport-com:wcfdemo:v1", Order=0)]
+        public string Description;
+        
+        public CustomEnvelope() {
+        }
+        
+        public CustomEnvelope(int Value, string Description) {
+            this.Value = Value;
+            this.Description = Description;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CustomReturnEnvelope", WrapperNamespace="urn:www-infosupport-com:wcfdemo:v1", IsWrapped=true)]
+    public partial class CustomReturnEnvelope {
+        
+        public CustomReturnEnvelope() {
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -206,6 +317,62 @@ namespace WcfDemo.Client.PingService {
         
         public System.Threading.Tasks.Task<WcfDemo.Client.PingService.Dataz> GiveMeAllTheDatazAsync(WcfDemo.Client.PingService.Data data) {
             return base.Channel.GiveMeAllTheDatazAsync(data);
+        }
+        
+        public void Throw() {
+            base.Channel.Throw();
+        }
+        
+        public System.Threading.Tasks.Task ThrowAsync() {
+            return base.Channel.ThrowAsync();
+        }
+        
+        public void Put(System.Guid data) {
+            base.Channel.Put(data);
+        }
+        
+        public System.Threading.Tasks.Task PutAsync(System.Guid data) {
+            return base.Channel.PutAsync(data);
+        }
+        
+        public System.Guid Get() {
+            return base.Channel.Get();
+        }
+        
+        public System.Threading.Tasks.Task<System.Guid> GetAsync() {
+            return base.Channel.GetAsync();
+        }
+        
+        public void ThrowCustomException() {
+            base.Channel.ThrowCustomException();
+        }
+        
+        public System.Threading.Tasks.Task ThrowCustomExceptionAsync() {
+            return base.Channel.ThrowCustomExceptionAsync();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        WcfDemo.Client.PingService.CustomReturnEnvelope WcfDemo.Client.PingService.pingservice.OperationWithCustomEnvelope(WcfDemo.Client.PingService.CustomEnvelope request) {
+            return base.Channel.OperationWithCustomEnvelope(request);
+        }
+        
+        public void OperationWithCustomEnvelope(int Value, string Description) {
+            WcfDemo.Client.PingService.CustomEnvelope inValue = new WcfDemo.Client.PingService.CustomEnvelope();
+            inValue.Value = Value;
+            inValue.Description = Description;
+            WcfDemo.Client.PingService.CustomReturnEnvelope retVal = ((WcfDemo.Client.PingService.pingservice)(this)).OperationWithCustomEnvelope(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<WcfDemo.Client.PingService.CustomReturnEnvelope> WcfDemo.Client.PingService.pingservice.OperationWithCustomEnvelopeAsync(WcfDemo.Client.PingService.CustomEnvelope request) {
+            return base.Channel.OperationWithCustomEnvelopeAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<WcfDemo.Client.PingService.CustomReturnEnvelope> OperationWithCustomEnvelopeAsync(int Value, string Description) {
+            WcfDemo.Client.PingService.CustomEnvelope inValue = new WcfDemo.Client.PingService.CustomEnvelope();
+            inValue.Value = Value;
+            inValue.Description = Description;
+            return ((WcfDemo.Client.PingService.pingservice)(this)).OperationWithCustomEnvelopeAsync(inValue);
         }
     }
 }

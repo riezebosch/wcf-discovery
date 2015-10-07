@@ -42,7 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomEnvelope.cs" />
     <Compile Include="CustomFaultDetails.cs" />
+    <Compile Include="CustomReturnEnvelope.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="Dataz.cs" />
     <Compile Include="IService.cs" />

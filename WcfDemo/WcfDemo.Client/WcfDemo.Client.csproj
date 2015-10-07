@@ -66,6 +66,12 @@
     <None Include="Service References\PingService\PingService12.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\PingService\PingService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PingService\WcfDemo.Client.PingService.CustomReturnEnvelope.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\PingService\WcfDemo.Client.PingService.Dataz.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

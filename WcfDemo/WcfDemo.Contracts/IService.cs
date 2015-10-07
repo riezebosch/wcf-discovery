@@ -31,5 +31,8 @@ namespace WcfDemo.Contracts
         [OperationContract]
         [FaultContract(typeof(CustomFaultDetails))]
         void ThrowCustomException();
+
+        [OperationContract]
+        CustomReturnEnvelope OperationWithCustomEnvelope(CustomEnvelope envelope);
     }
 }
