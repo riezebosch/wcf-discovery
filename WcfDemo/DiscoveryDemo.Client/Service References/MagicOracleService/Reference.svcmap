@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="19ff1417-dab3-4766-a1cb-d946f8ec53f3" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:4988/MagicOracle.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MagicOracle.xsd" MetadataType="Schema" ID="abfe5934-364d-42a1-b0ae-0dc6edae19b3" SourceId="1" SourceUrl="http://localhost:4988/MagicOracle.svc?xsd=xsd1" />
+    <MetadataFile FileName="MagicOracle.disco" MetadataType="Disco" ID="9d7f57c7-6f10-4b0e-8b90-0328bf4301c8" SourceId="1" SourceUrl="http://localhost:4988/MagicOracle.svc?disco" />
+    <MetadataFile FileName="MagicOracleService.wsdl" MetadataType="Wsdl" ID="2af1bfcf-a3eb-4209-9769-c8f0498213e1" SourceId="1" SourceUrl="http://localhost:4988/MagicOracle.svc?wsdl" />
+    <MetadataFile FileName="MagicOracle.wsdl" MetadataType="Wsdl" ID="b7757701-79bb-4ea8-af24-7fab88b48718" SourceId="1" SourceUrl="http://localhost:4988/MagicOracle.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="MagicOracle1.xsd" MetadataType="Schema" ID="0edee190-8111-4573-86bc-c210fc818249" SourceId="1" SourceUrl="http://localhost:4988/MagicOracle.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

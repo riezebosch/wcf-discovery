@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="urn:www-infosupport-com:discovery-demo" elementFormDefault="qualified" targetNamespace="urn:www-infosupport-com:discovery-demo" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Answer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="question" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AnswerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AnswerResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

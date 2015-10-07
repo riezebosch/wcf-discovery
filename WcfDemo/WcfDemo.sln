@@ -21,6 +21,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscoveryDemo.Web", "DiscoveryDemo.Web\DiscoveryDemo.Web.csproj", "{02EE2FAD-CE43-4E2A-833A-205A4B0E151B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscoveryDemo.Client", "DiscoveryDemo.Client\DiscoveryDemo.Client.csproj", "{03687460-EAAE-4530-A5C3-65B187B059F6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{02EE2FAD-CE43-4E2A-833A-205A4B0E151B} = {02EE2FAD-CE43-4E2A-833A-205A4B0E151B}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscoveryDemo.Service.Tests", "DiscoveryDemo.Service.Tests\DiscoveryDemo.Service.Tests.csproj", "{C2415251-8F28-4761-8593-8937B4DFD672}"
 EndProject
