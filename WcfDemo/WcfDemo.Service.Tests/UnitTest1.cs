@@ -50,7 +50,7 @@ namespace WcfDemo.Service.Tests
         {
             callback = new ClientUpdateCallback();
             var factory = new DuplexChannelFactory<IService>(callback,
-                new NetNamedPipeBinding(),
+                new NetNamedPipeBinding { TransactionFlow = true },
                 new EndpointAddress("net.pipe://localhost/ping"));
             client = factory.CreateChannel();
         }
@@ -71,7 +71,7 @@ namespace WcfDemo.Service.Tests
                 {
                     co.Abort();
                 }
-                catch(TimeoutException)
+                catch (TimeoutException)
                 {
                     co.Abort();
                 }
@@ -185,18 +185,31 @@ namespace WcfDemo.Service.Tests
             using (new TransactionScope())
             {
                 client.TransactionSupported(1, name);
-
                 using (var context = new SchoolContext())
                 {
-                    Assert.IsTrue(context.People.Any(p => p.FirstName == name), "De service moet gedurende de transaction natuurlijk wel wat in de database doen.");
+                    Assert.IsTrue(context.People.Any(p => p.FirstName == name), 
+                        "De service moet gedurende de transaction natuurlijk wel wat in de database doen.");
                 }
             }
 
             using (var context = new SchoolContext())
             {
-                Assert.IsFalse(context.People.Any(p => p.FirstName == name), "Blijkbaar werkt de transaction nog niet want de data staat gewoon in de database.");
+                Assert.IsFalse(context.People.Any(p => p.FirstName == name), 
+                    "Blijkbaar werkt de transaction nog niet want de data staat gewoon in de database.");
             }
+        }
 
+        [TestMethod]
+        public void IsDeMethodeSnellerZonderTransaction()
+        {
+            var name = Guid.NewGuid().ToString();
+
+            client.TransactionSupported(1, name);
+            using (var context = new SchoolContext())
+            {
+                Assert.IsTrue(context.People.Any(p => p.FirstName == name), 
+                    "De service moet gedurende de transaction natuurlijk wel wat in de database doen.");
+            }
         }
     }
 }

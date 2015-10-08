@@ -47,6 +47,7 @@ namespace WcfDemo.Contracts
         void Save(Persoon p);
 
         [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
         void TransactionSupported(int id, string name);
     }
 }

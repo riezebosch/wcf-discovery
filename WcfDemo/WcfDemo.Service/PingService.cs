@@ -86,6 +86,7 @@ namespace WcfDemo.Service
                 });
         }
 
+        [OperationBehavior(TransactionScopeRequired = true)]
         public void TransactionSupported(int id, string name)
         {
             using (var context = new SchoolContext())
