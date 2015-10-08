@@ -49,5 +49,8 @@ namespace WcfDemo.Contracts
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         void TransactionSupported(int id, string name);
+
+        [OperationContract]
+        void Secure();
     }
 }

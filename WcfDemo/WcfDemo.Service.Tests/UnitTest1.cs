@@ -8,6 +8,9 @@ using WcfDemo.DataModel;
 using System.Transactions;
 using System.IO;
 using System.Data.Entity;
+using System.Security.Permissions;
+using System.ServiceModel.Security;
+using System.Security.Cryptography.X509Certificates;
 
 namespace WcfDemo.Service.Tests
 {
@@ -210,6 +213,39 @@ namespace WcfDemo.Service.Tests
                 Assert.IsTrue(context.People.Any(p => p.FirstName == name), 
                     "De service moet gedurende de transaction natuurlijk wel wat in de database doen.");
             }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(SecurityAccessDeniedException))]
+        public void WanneerNietIngelogdDanException()
+        {
+            client.Secure();
+        }
+
+        [TestMethod]
+        public void WanneerIngelogdDanGeenException()
+        {
+            callback = new ClientUpdateCallback();
+            var binding = new NetTcpBinding(SecurityMode.Message);
+            binding
+                .Security
+                .Message
+                .ClientCredentialType = 
+                    MessageCredentialType.UserName;
+
+            var factory = new DuplexChannelFactory<IService>(callback,
+                binding,
+                new EndpointAddress("net.tcp://localhost:6789"));
+
+            factory.Credentials.UserName.UserName = "Manuel";
+            factory.Credentials.UserName.Password = "secure";
+
+            factory.Credentials.ServiceCertificate.SetDefaultCertificate(StoreLocation.LocalMachine, StoreName.My, X509FindType.FindBySubjectName, "localhost");
+            factory.Credentials.ServiceCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.None;
+
+            client = factory.CreateChannel();
+
+            client.Secure();
         }
     }
 }

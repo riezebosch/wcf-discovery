@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.ServiceModel;
 using System.Threading;
 using System.Web;
@@ -49,6 +50,11 @@ namespace WcfDemo.Service
         }
 
         public void Save(Persoon p)
+        {
+        }
+
+        [PrincipalPermission(SecurityAction.Demand, Name = "Manuel")]
+        public void Secure()
         {
         }
 
