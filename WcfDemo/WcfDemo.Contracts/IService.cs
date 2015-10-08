@@ -45,5 +45,8 @@ namespace WcfDemo.Contracts
 
         [OperationContract]
         void Save(Persoon p);
+
+        [OperationContract]
+        void TransactionSupported(int id, string name);
     }
 }

@@ -3,6 +3,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.ServiceModel;
 using WcfDemo.Contracts;
 using System.Diagnostics;
+using System.Linq;
+using WcfDemo.DataModel;
+using System.Transactions;
+using System.IO;
+using System.Data.Entity;
 
 namespace WcfDemo.Service.Tests
 {
@@ -22,12 +27,19 @@ namespace WcfDemo.Service.Tests
                 .Find<ServiceBehaviorAttribute>()
                 .IncludeExceptionDetailInFaults = true;
             _host.Open();
+
+            // Prevent EF from trying to auto-create the database.
+            Database.SetInitializer<SchoolContext>(null);
         }
 
         [ClassCleanup]
         public static void Cleanup()
         {
             _host.Abort();
+
+            // Cleanup for subsequent testrun.
+            LocalDbHelper.Delete();
+            File.Delete("School_log.ldf");
         }
 
         IService client;
@@ -164,6 +176,27 @@ namespace WcfDemo.Service.Tests
         {
             Persoon p = new Student { Naam = "Pietje", StudentNummer = 213 };
             client.Save(p);
+        }
+
+        [TestMethod]
+        public void BijNietCommitOpClientOokRollbackOpService()
+        {
+            var name = Guid.NewGuid().ToString();
+            using (new TransactionScope())
+            {
+                client.TransactionSupported(1, name);
+
+                using (var context = new SchoolContext())
+                {
+                    Assert.IsTrue(context.People.Any(p => p.FirstName == name), "De service moet gedurende de transaction natuurlijk wel wat in de database doen.");
+                }
+            }
+
+            using (var context = new SchoolContext())
+            {
+                Assert.IsFalse(context.People.Any(p => p.FirstName == name), "Blijkbaar werkt de transaction nog niet want de data staat gewoon in de database.");
+            }
+
         }
     }
 }

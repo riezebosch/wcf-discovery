@@ -5,7 +5,7 @@ using System.ServiceModel;
 using System.Threading;
 using System.Web;
 using WcfDemo.Contracts;
-
+using WcfDemo.DataModel;
 
 namespace WcfDemo.Service
 {
@@ -84,6 +84,18 @@ namespace WcfDemo.Service
                 {
                     Bericht = "dat mag dus niet"
                 });
+        }
+
+        public void TransactionSupported(int id, string name)
+        {
+            using (var context = new SchoolContext())
+            {
+                var p = context.People.Find(id);
+                p.FirstName = name;
+
+                context.SaveChanges();
+            }
+
         }
     }
 }
