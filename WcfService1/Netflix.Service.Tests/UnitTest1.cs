@@ -67,5 +67,15 @@ namespace Netflix.Service.Tests
         {
             host.Description.Namespace.ShouldNotBe("http://tempuri.org/");
         }
+
+        [TestMethod]
+        public void WatIsDeStandaardInstanceContextMode()
+        {
+            var data = Guid.NewGuid();
+            client.SetState(data);
+
+            Guid result = client.GetData();
+            result.ShouldBe(data);
+        }
     }
 }

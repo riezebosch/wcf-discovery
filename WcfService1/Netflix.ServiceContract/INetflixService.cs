@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.ServiceModel;
 
 namespace Netflix.ServiceContract
 {
@@ -7,5 +8,11 @@ namespace Netflix.ServiceContract
     {
         [OperationContract]
         string[] Top10();
+
+        [OperationContract]
+        void SetState(Guid data);
+
+        [OperationContract]
+        Guid GetData();
     }
 }
