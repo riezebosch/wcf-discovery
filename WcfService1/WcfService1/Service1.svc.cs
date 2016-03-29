@@ -29,5 +29,10 @@ namespace WcfService1
             }
             return composite;
         }
+
+        public void Nothing(MyData data)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
