@@ -9,28 +9,43 @@ namespace Netflix.Service.Tests
     [TestClass]
     public class UnitTest1
     {
+        static ServiceHost host;
+
+        [ClassInitialize]
+        public static void Initialize(TestContext unused)
+        {
+            host = new ServiceHost(typeof(NetflixService));
+            host.AddServiceEndpoint(typeof(INetflixService),
+                new NetNamedPipeBinding(),
+                "net.pipe://localhost/netflix");
+
+            host.Open();
+        }
+
+        [ClassCleanup]
+        public static void CleanUp()
+        {
+            host.Abort();
+        }
+
+
+        INetflixService client;
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            client = ChannelFactory<INetflixService>.CreateChannel(new NetNamedPipeBinding(), new EndpointAddress("net.pipe://localhost/netflix"));
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            ((ICommunicationObject)client).Close();
+        }
+
         [TestMethod]
         public void Top10MeestBekekenTitels()
         {
-            var host = new ServiceHost(typeof(NetflixService));
-            try
-            {
-                host.AddServiceEndpoint(typeof(INetflixService),
-                    new NetNamedPipeBinding(),
-                    "net.pipe://localhost/netflix");
-                host.Open();
-
-                var client = ChannelFactory<INetflixService>.CreateChannel(new NetNamedPipeBinding(), new EndpointAddress("net.pipe://localhost/netflix"));
-                client.Top10().Length.ShouldBe(10);
-                ((ICommunicationObject)client).Close();
-            }
-            finally
-            {
-                host.Close();
-            }
-
-
-           
+            client.Top10().Length.ShouldBe(10);
         }
     }
 }
