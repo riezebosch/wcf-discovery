@@ -4,6 +4,8 @@ using Shouldly;
 using System.ServiceModel;
 using Netflix.ServiceContract;
 using System.Linq;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Netflix.Service.Tests
 {
@@ -34,7 +36,12 @@ namespace Netflix.Service.Tests
         [TestInitialize]
         public void TestInitialize()
         {
-            client = ChannelFactory<INetflixService>.CreateChannel(new NetNamedPipeBinding(), new EndpointAddress("net.pipe://localhost/netflix"));
+            client = CreateClient();
+        }
+
+        private static INetflixService CreateClient()
+        {
+            return ChannelFactory<INetflixService>.CreateChannel(new NetNamedPipeBinding(), new EndpointAddress("net.pipe://localhost/netflix"));
         }
 
         [TestCleanup]
@@ -76,6 +83,44 @@ namespace Netflix.Service.Tests
 
             Guid result = client.GetData();
             result.ShouldNotBe(data);
+        }
+
+        [TestMethod]
+        public void MetDeInstanceContextModeOp_PerCall_EnConcurrencyModeOp_Single_NogSteedsMeerdereRequestsTegelijk()
+        {
+            var sw = Stopwatch.StartNew();
+
+            Task.WaitAll(
+                InvokeSlow(), 
+                InvokeSlow()
+            );
+
+            sw.Elapsed.ShouldBeGreaterThan(TimeSpan.FromSeconds(5));
+            sw.Elapsed.ShouldBeLessThan(TimeSpan.FromSeconds(10));
+        }
+
+        [TestMethod]
+        public void MetServiceThrottlingOp2MoetDeDerdeWachten()
+        {
+            var sw = Stopwatch.StartNew();
+
+            Task.WaitAll(
+                InvokeSlow(),
+                InvokeSlow(),
+                InvokeSlow()
+            );
+
+            sw.Elapsed.ShouldBeGreaterThan(TimeSpan.FromSeconds(10));
+            sw.Elapsed.ShouldBeLessThan(TimeSpan.FromSeconds(15));
+        }
+
+        private static Task InvokeSlow()
+        {
+            return Task.Run(() =>
+            {
+                var client1 = CreateClient();
+                client1.Slow();
+            });
         }
     }
 }

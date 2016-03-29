@@ -14,5 +14,8 @@ namespace Netflix.ServiceContract
 
         [OperationContract]
         Guid GetData();
+
+        [OperationContract]
+        void Slow();
     }
 }
