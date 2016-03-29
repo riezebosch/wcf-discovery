@@ -2,7 +2,7 @@
 
 namespace Netflix.ServiceContract
 {
-    [ServiceContract]
+    [ServiceContract(Namespace = "urn:www-netflix-com:wcf-demo")]
     public interface INetflixService
     {
         [OperationContract]

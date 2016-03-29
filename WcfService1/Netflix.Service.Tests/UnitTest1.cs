@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shouldly;
 using System.ServiceModel;
 using Netflix.ServiceContract;
+using System.Linq;
 
 namespace Netflix.Service.Tests
 {
@@ -46,6 +47,19 @@ namespace Netflix.Service.Tests
         public void Top10MeestBekekenTitels()
         {
             client.Top10().Length.ShouldBe(10);
+        }
+
+        [TestMethod]
+        public void ServiceContractNamespaceMoetEenWaardeHebben()
+        {
+            var contract = typeof(INetflixService);
+            var attr = contract
+                .GetCustomAttributes(typeof(ServiceContractAttribute), true)
+                .Cast<ServiceContractAttribute>()
+                .FirstOrDefault();
+
+            attr.ShouldNotBeNull("Geen service contract attribute gevonden");
+            attr.Namespace.ShouldNotBeNull();
         }
     }
 }
