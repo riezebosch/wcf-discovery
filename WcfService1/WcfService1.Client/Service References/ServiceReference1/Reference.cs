@@ -74,6 +74,51 @@ namespace WcfService1.Client.ServiceReference1 {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MyData", Namespace="http://schemas.datacontract.org/2004/07/WcfService1")]
+    [System.SerializableAttribute()]
+    public partial class MyData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int MyPropertyField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int MyProperty {
+            get {
+                return this.MyPropertyField;
+            }
+            set {
+                if ((this.MyPropertyField.Equals(value) != true)) {
+                    this.MyPropertyField = value;
+                    this.RaisePropertyChanged("MyProperty");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IService1")]
     public interface IService1 {
@@ -89,6 +134,12 @@ namespace WcfService1.Client.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
         System.Threading.Tasks.Task<WcfService1.Client.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(WcfService1.Client.ServiceReference1.CompositeType composite);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Nothing", ReplyAction="http://tempuri.org/IService1/NothingResponse")]
+        void Nothing(WcfService1.Client.ServiceReference1.MyData data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Nothing", ReplyAction="http://tempuri.org/IService1/NothingResponse")]
+        System.Threading.Tasks.Task NothingAsync(WcfService1.Client.ServiceReference1.MyData data);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -132,6 +183,14 @@ namespace WcfService1.Client.ServiceReference1 {
         
         public System.Threading.Tasks.Task<WcfService1.Client.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(WcfService1.Client.ServiceReference1.CompositeType composite) {
             return base.Channel.GetDataUsingDataContractAsync(composite);
+        }
+        
+        public void Nothing(WcfService1.Client.ServiceReference1.MyData data) {
+            base.Channel.Nothing(data);
+        }
+        
+        public System.Threading.Tasks.Task NothingAsync(WcfService1.Client.ServiceReference1.MyData data) {
+            return base.Channel.NothingAsync(data);
         }
     }
 }

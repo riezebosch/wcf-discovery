@@ -7,4 +7,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CompositeType" nillable="true" type="tns:CompositeType" />
+  <xs:complexType name="MyData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MyProperty" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MyData" nillable="true" type="tns:MyData" />
 </xs:schema>
