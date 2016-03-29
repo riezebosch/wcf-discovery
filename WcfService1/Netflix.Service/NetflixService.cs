@@ -1,8 +1,10 @@
 ﻿using Netflix.ServiceContract;
 using System;
+using System.ServiceModel;
 
 namespace Netflix.Service
 {
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class NetflixService : INetflixService
     {
         private Guid _data;

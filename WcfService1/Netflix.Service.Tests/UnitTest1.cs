@@ -75,7 +75,7 @@ namespace Netflix.Service.Tests
             client.SetState(data);
 
             Guid result = client.GetData();
-            result.ShouldBe(data);
+            result.ShouldNotBe(data);
         }
     }
 }
