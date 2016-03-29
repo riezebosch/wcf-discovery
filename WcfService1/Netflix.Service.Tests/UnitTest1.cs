@@ -61,5 +61,11 @@ namespace Netflix.Service.Tests
             attr.ShouldNotBeNull("Geen service contract attribute gevonden");
             attr.Namespace.ShouldNotBeNull();
         }
+
+        [TestMethod]
+        public void ServiceContractNamespaceMoetEenWaardeHebben_TestOpServiceHost()
+        {
+            host.Description.Namespace.ShouldNotBe("http://tempuri.org/");
+        }
     }
 }
