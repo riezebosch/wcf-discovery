@@ -72,7 +72,7 @@ namespace Netflix.Service.Tests
         [TestMethod]
         public void ServiceContractNamespaceMoetEenWaardeHebben_TestOpServiceHost()
         {
-            host.Description.Namespace.ShouldNotBe("http://tempuri.org/");
+            host.Description.Endpoints.ShouldAllBe(c => c.Contract.Namespace != "http://tempuri.org/");
         }
 
         [TestMethod]
