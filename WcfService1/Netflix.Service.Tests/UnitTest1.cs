@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Netflix.DataContracts;
 using System.Runtime.Serialization;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Netflix.Service.Tests
 {
@@ -164,7 +165,8 @@ namespace Netflix.Service.Tests
         [TestMethod]
         public void GraphsInJeDataContract()
         {
-            TestSerialize(new NetflixService().Top10());
+            var result = TestSerialize(new NetflixService().Top10());
+            Console.WriteLine(result);
 
             IEnumerable<Title> titles = client.Top10();
             var serie = titles.OfType<Serie>().FirstOrDefault();
@@ -185,12 +187,15 @@ namespace Netflix.Service.Tests
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="item"></param>
-        private static void TestSerialize<T>(T item)
+        private static string TestSerialize<T>(T item)
         {
             using (var stream = new System.IO.MemoryStream())
             {
                 var ser = new DataContractSerializer(typeof(T));
                 ser.WriteObject(stream, item);
+
+                stream.Seek(0, SeekOrigin.Begin);
+                return new StreamReader(stream).ReadToEnd();
             }
         }
     }
