@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="urn:www-netflix-com:wcf-demo" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:www-netflix-com:wcf-demo" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:www-netflix-com:wcf-demo/Imports">
+      <xsd:import schemaLocation="http://localhost/Netflix/Service.svc?xsd=xsd0" namespace="urn:www-netflix-com:wcf-demo" />
+      <xsd:import schemaLocation="http://localhost/Netflix/Service.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost/Netflix/Service.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="INetflixService_Top10_InputMessage">
+    <wsdl:part name="parameters" element="tns:Top10" />
+  </wsdl:message>
+  <wsdl:message name="INetflixService_Top10_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Top10Response" />
+  </wsdl:message>
+  <wsdl:message name="INetflixService_SetState_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetState" />
+  </wsdl:message>
+  <wsdl:message name="INetflixService_SetState_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="INetflixService_GetData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetData" />
+  </wsdl:message>
+  <wsdl:message name="INetflixService_GetData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="INetflixService_Slow_InputMessage">
+    <wsdl:part name="parameters" element="tns:Slow" />
+  </wsdl:message>
+  <wsdl:message name="INetflixService_Slow_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SlowResponse" />
+  </wsdl:message>
+  <wsdl:portType name="INetflixService">
+    <wsdl:operation name="Top10">
+      <wsdl:input wsaw:Action="urn:www-netflix-com:wcf-demo/INetflixService/Top10" message="tns:INetflixService_Top10_InputMessage" />
+      <wsdl:output wsaw:Action="urn:www-netflix-com:wcf-demo/INetflixService/Top10Response" message="tns:INetflixService_Top10_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetState">
+      <wsdl:input wsaw:Action="urn:www-netflix-com:wcf-demo/INetflixService/SetState" message="tns:INetflixService_SetState_InputMessage" />
+      <wsdl:output wsaw:Action="urn:www-netflix-com:wcf-demo/INetflixService/SetStateResponse" message="tns:INetflixService_SetState_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetData">
+      <wsdl:input wsaw:Action="urn:www-netflix-com:wcf-demo/INetflixService/GetData" message="tns:INetflixService_GetData_InputMessage" />
+      <wsdl:output wsaw:Action="urn:www-netflix-com:wcf-demo/INetflixService/GetDataResponse" message="tns:INetflixService_GetData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Slow">
+      <wsdl:input wsaw:Action="urn:www-netflix-com:wcf-demo/INetflixService/Slow" message="tns:INetflixService_Slow_InputMessage" />
+      <wsdl:output wsaw:Action="urn:www-netflix-com:wcf-demo/INetflixService/SlowResponse" message="tns:INetflixService_Slow_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

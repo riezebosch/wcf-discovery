@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\IIS.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -85,6 +86,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Netflix.ServiceContract\Netflix.ServiceContract.csproj">
+      <Project>{67d6b6e6-0539-4d20-82a9-08f2fecdb44b}</Project>
+      <Name>Netflix.ServiceContract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Netflix.Service\Netflix.Service.csproj">
       <Project>{79d62a13-43cf-46b3-96bc-194f13aaa93f}</Project>
       <Name>Netflix.Service</Name>
