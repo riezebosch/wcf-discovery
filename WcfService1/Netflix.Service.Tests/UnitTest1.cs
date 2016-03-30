@@ -7,6 +7,7 @@ using System.Linq;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Netflix.DataContracts;
+using System.Runtime.Serialization;
 
 namespace Netflix.Service.Tests
 {
@@ -128,6 +129,20 @@ namespace Netflix.Service.Tests
         public void WatGebeurtMetEenErrorOpDeService()
         {
             Should.Throw<FaultException<NetflixFault>>(() => client.Throw());
+        }
+
+        [TestMethod]
+        public void DataContractNamespaceMoetEenWaardeHebben()
+        {
+            var types = typeof(NetflixFault).Assembly.GetTypes();
+            types.ShouldAllBe(t => ContractsHaveNamespace(t));
+        }
+
+        private static bool ContractsHaveNamespace(Type t)
+        {
+            return t.GetCustomAttributes(typeof(DataContractAttribute), true)
+                    .Cast<DataContractAttribute>()
+                    .All(dc => dc.Namespace != null);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Netflix.DataContracts
 {
-    [DataContract]
+    [DataContract(Namespace = "urn:www-netflix-com:wcf-demo:dc")]
     public class NetflixFault
     {
     }
