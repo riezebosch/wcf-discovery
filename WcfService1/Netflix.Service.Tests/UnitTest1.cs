@@ -220,5 +220,14 @@ namespace Netflix.Service.Tests
             client.Search();
             callback.WaitForAllResults();
         }
+
+        [TestMethod]
+        public void FullDuplexClientGoneCommunicationExceptionGoesUnnoticed()
+        {
+            client.Search();
+            ((ICommunicationObject)client).Abort();
+
+            System.Threading.Thread.Sleep(5000);
+        }
     }
 }
