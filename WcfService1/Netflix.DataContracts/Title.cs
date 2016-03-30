@@ -7,5 +7,7 @@ namespace Netflix.DataContracts
     [KnownType(typeof(Serie))]
     public class Title
     {
+        [DataMember]
+        public string Name { get; set; }
     }
 }

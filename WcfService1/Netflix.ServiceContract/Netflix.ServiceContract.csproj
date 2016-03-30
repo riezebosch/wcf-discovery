@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="INetflixCallback.cs" />
     <Compile Include="INetflixService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

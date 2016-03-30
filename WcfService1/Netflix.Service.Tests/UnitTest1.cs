@@ -38,15 +38,20 @@ namespace Netflix.Service.Tests
 
 
         INetflixService client;
+        NetflixCallback callback;
+
         [TestInitialize]
         public void TestInitialize()
         {
-            client = CreateClient();
+            callback = new NetflixCallback();
+            client = CreateClient(callback);
         }
 
-        private static INetflixService CreateClient()
+        private static INetflixService CreateClient(INetflixCallback callback)
         {
-            return ChannelFactory<INetflixService>.CreateChannel(new NetNamedPipeBinding(), new EndpointAddress("net.pipe://localhost/netflix"));
+            return DuplexChannelFactory<INetflixService>.CreateChannel(callback,
+                new NetNamedPipeBinding(),
+                new EndpointAddress("net.pipe://localhost/netflix"));
         }
 
         [TestCleanup]
@@ -61,6 +66,8 @@ namespace Netflix.Service.Tests
             {
                 co.Abort();
             }
+
+            callback.Dispose();
         }
 
         [TestMethod]
@@ -131,8 +138,11 @@ namespace Netflix.Service.Tests
         {
             return Task.Run(() =>
             {
-                var client1 = CreateClient();
-                client1.Slow();
+                using (var callback = new NetflixCallback())
+                {
+                    var client1 = CreateClient(callback);
+                    client1.Slow();
+                }
             });
         }
 
@@ -200,8 +210,15 @@ namespace Netflix.Service.Tests
 
                 stream.Seek(0, SeekOrigin.Begin);
                 return new StreamReader(stream).ReadToEnd();
-
             }
+        }
+
+
+        [TestMethod]
+        public void FullDuplexSearch()
+        {
+            client.Search();
+            callback.WaitForAllResults();
         }
     }
 }

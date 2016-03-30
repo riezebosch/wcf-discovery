@@ -4,7 +4,8 @@ using System.ServiceModel;
 
 namespace Netflix.ServiceContract
 {
-    [ServiceContract(Namespace = "urn:www-netflix-com:wcf-demo")]
+    [ServiceContract(Namespace = "urn:www-netflix-com:wcf-demo",
+        CallbackContract = typeof(INetflixCallback))]
     public interface INetflixService
     {
         [OperationContract]
@@ -22,5 +23,8 @@ namespace Netflix.ServiceContract
         [OperationContract]
         [FaultContract(typeof(NetflixFault))]
         void Throw();
+
+        [OperationContract(IsOneWay = true)]
+        void Search();
     }
 }
