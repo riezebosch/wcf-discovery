@@ -10,6 +10,7 @@ using Netflix.DataContracts;
 using System.Runtime.Serialization;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml;
 
 namespace Netflix.Service.Tests
 {
@@ -191,11 +192,15 @@ namespace Netflix.Service.Tests
         {
             using (var stream = new System.IO.MemoryStream())
             {
-                var ser = new DataContractSerializer(typeof(T));
-                ser.WriteObject(stream, item);
+                using (var writer = XmlWriter.Create(stream, new XmlWriterSettings { Indent = true, IndentChars = "\t" }))
+                {
+                    var ser = new DataContractSerializer(typeof(T));
+                    ser.WriteObject(writer, item);
+                }
 
                 stream.Seek(0, SeekOrigin.Begin);
                 return new StreamReader(stream).ReadToEnd();
+
             }
         }
     }
