@@ -6,6 +6,7 @@ using Netflix.ServiceContract;
 using System.Linq;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Netflix.DataContracts;
 
 namespace Netflix.Service.Tests
 {
@@ -121,6 +122,12 @@ namespace Netflix.Service.Tests
                 var client1 = CreateClient();
                 client1.Slow();
             });
+        }
+
+        [TestMethod]
+        public void WatGebeurtMetEenErrorOpDeService()
+        {
+            Should.Throw<FaultException<NetflixFault>>(() => client.Throw());
         }
     }
 }

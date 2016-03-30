@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Netflix.DataContracts;
+using System;
 using System.ServiceModel;
 
 namespace Netflix.ServiceContract
@@ -17,5 +18,9 @@ namespace Netflix.ServiceContract
 
         [OperationContract]
         void Slow();
+
+        [OperationContract]
+        [FaultContract(typeof(NetflixFault))]
+        void Throw();
     }
 }

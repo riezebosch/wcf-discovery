@@ -59,6 +59,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Netflix.DataContracts\Netflix.DataContracts.csproj">
+      <Project>{2FE5279F-3360-47D7-A880-4B63471AF5FD}</Project>
+      <Name>Netflix.DataContracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Netflix.ServiceContract\Netflix.ServiceContract.csproj">
       <Project>{67D6B6E6-0539-4D20-82A9-08F2FECDB44B}</Project>
       <Name>Netflix.ServiceContract</Name>

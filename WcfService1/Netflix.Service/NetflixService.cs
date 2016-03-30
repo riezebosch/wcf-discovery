@@ -1,4 +1,5 @@
-﻿using Netflix.ServiceContract;
+﻿using Netflix.DataContracts;
+using Netflix.ServiceContract;
 using System;
 using System.ServiceModel;
 using System.Threading;
@@ -24,6 +25,11 @@ namespace Netflix.Service
         public void Slow()
         {
             Thread.Sleep(5000);
+        }
+
+        public void Throw()
+        {
+            throw new FaultException<NetflixFault>(new NetflixFault(), "oeioeioei");
         }
 
         public string[] Top10()
