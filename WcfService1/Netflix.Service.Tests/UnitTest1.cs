@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Netflix.DataContracts;
 using System.Runtime.Serialization;
+using System.Collections.Generic;
 
 namespace Netflix.Service.Tests
 {
@@ -49,7 +50,15 @@ namespace Netflix.Service.Tests
         [TestCleanup]
         public void TestCleanup()
         {
-            ((ICommunicationObject)client).Close();
+            var co = (ICommunicationObject)client;
+            if (co.State == CommunicationState.Opened)
+            {
+                co.Close();
+            }
+            else
+            {
+                co.Abort();
+            }
         }
 
         [TestMethod]
@@ -143,6 +152,13 @@ namespace Netflix.Service.Tests
             return t.GetCustomAttributes(typeof(DataContractAttribute), true)
                     .Cast<DataContractAttribute>()
                     .All(dc => dc.Namespace != null);
+        }
+
+        [TestMethod]
+        public void AfgeleideClassesOnderdeelVanHetContractMaken()
+        {
+            IEnumerable<Title> titles = client.Top10();
+            titles.ShouldContain(t => t is Movie);
         }
     }
 }

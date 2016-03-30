@@ -32,9 +32,20 @@ namespace Netflix.Service
             throw new FaultException<NetflixFault>(new NetflixFault(), "oeioeioei");
         }
 
-        public string[] Top10()
+        public Title[] Top10()
         {
-            return  new string[10];
+            return  new[] {
+                    new Title { },
+                    new Title { },
+                    new Title { },
+                    new Title { },
+                    new Title { },
+                    new Title { },
+                    new Title { },
+                    new Title { },
+                    new Title { },
+                    new Movie { }
+                };
         }
     }
 }

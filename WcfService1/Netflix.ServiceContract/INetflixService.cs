@@ -8,7 +8,7 @@ namespace Netflix.ServiceContract
     public interface INetflixService
     {
         [OperationContract]
-        string[] Top10();
+        Title[] Top10();
 
         [OperationContract]
         void SetState(Guid data);

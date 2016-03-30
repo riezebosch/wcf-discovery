@@ -3,8 +3,8 @@
 namespace Netflix.DataContracts
 {
     [DataContract(Namespace = Constants.Namespace)]
-    public class NetflixFault
+    [KnownType(typeof(Movie))]
+    public class Title
     {
-        
     }
 }
