@@ -34,6 +34,13 @@ namespace Netflix.Service
 
         public Title[] Top10()
         {
+            var episode = new Episode { };
+            var serie = new Serie
+            {
+                Episodes = new[] { episode }
+            };
+            episode.Serie = serie;
+
             return  new[] {
                     new Title { },
                     new Title { },
@@ -43,7 +50,7 @@ namespace Netflix.Service
                     new Title { },
                     new Title { },
                     new Title { },
-                    new Title { },
+                    serie,
                     new Movie { }
                 };
         }

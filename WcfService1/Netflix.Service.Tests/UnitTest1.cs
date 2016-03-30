@@ -102,7 +102,7 @@ namespace Netflix.Service.Tests
             var sw = Stopwatch.StartNew();
 
             Task.WaitAll(
-                InvokeSlow(), 
+                InvokeSlow(),
                 InvokeSlow()
             );
 
@@ -159,6 +159,39 @@ namespace Netflix.Service.Tests
         {
             IEnumerable<Title> titles = client.Top10();
             titles.ShouldContain(t => t is Movie);
+        }
+
+        [TestMethod]
+        public void GraphsInJeDataContract()
+        {
+            TestSerialize(new NetflixService().Top10());
+
+            IEnumerable<Title> titles = client.Top10();
+            var serie = titles.OfType<Serie>().FirstOrDefault();
+
+            serie.ShouldNotBeNull();
+            serie.Episodes.ShouldNotBeNull();
+
+            var episode = serie.Episodes.FirstOrDefault();
+            episode.ShouldNotBeNull();
+
+            // Testen van back reference.
+            episode.Serie.ShouldNotBeNull();
+        }
+
+        /// <summary>
+        /// Data Contract Serializer to the rescue!
+        /// Voor als WCF je geen heldere foutmeldingen meer geeft.            
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="item"></param>
+        private static void TestSerialize<T>(T item)
+        {
+            using (var stream = new System.IO.MemoryStream())
+            {
+                var ser = new DataContractSerializer(typeof(T));
+                ser.WriteObject(stream, item);
+            }
         }
     }
 }
