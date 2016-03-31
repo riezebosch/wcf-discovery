@@ -48,13 +48,18 @@ namespace Discovery.Service.Tests
         private static IDiscoveryOracle CreateClient()
         {
             var disco = new DiscoveryClient(new UdpDiscoveryEndpoint());
-            var response = disco.Find(new FindCriteria(typeof(IDiscoveryOracle)) { MaxResults = 3  });
+            var criteria = new FindCriteria(typeof(IDiscoveryOracle)) { MaxResults = 2 };
+            //criteria.Scopes.Add(new Uri("net.pipe://localhost/discovery"));
+            //criteria.ScopeMatchBy = FindCriteria.ScopeMatchByLdap;
+
+            var response = disco.Find(criteria);
 
             // Nu we de service in IIS hebben gedployed reageren er ook opeens services die met een
             // BasicHttpBinding zijn geconfigureerd waarop onze test stuk gaat omdat die uitgaat van
             // een NetNamedPipeBinding...
             var endpoint = response.Endpoints.FirstOrDefault(ep => ep.Address.Uri.Scheme == "net.pipe");
             endpoint.ShouldNotBeNull();
+            Console.WriteLine(endpoint.Address);
 
             return ChannelFactory<IDiscoveryOracle>.CreateChannel(
                 new NetNamedPipeBinding(),
