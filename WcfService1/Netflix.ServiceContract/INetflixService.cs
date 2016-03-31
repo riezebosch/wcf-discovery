@@ -26,5 +26,8 @@ namespace Netflix.ServiceContract
 
         [OperationContract(IsOneWay = true)]
         void Search();
+
+        [OperationContract]
+        void Transaction(Guid data);
     }
 }

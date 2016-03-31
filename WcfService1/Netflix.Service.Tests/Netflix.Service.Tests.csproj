@@ -36,6 +36,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -45,8 +53,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <Choose>
@@ -70,6 +80,10 @@
     <ProjectReference Include="..\Netflix.DataContracts\Netflix.DataContracts.csproj">
       <Project>{2FE5279F-3360-47D7-A880-4B63471AF5FD}</Project>
       <Name>Netflix.DataContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Netflix.DataModel\Netflix.DataModel.csproj">
+      <Project>{CDAADE66-386A-4C94-A982-323B3FE25B6A}</Project>
+      <Name>Netflix.DataModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\Netflix.ServiceContract\Netflix.ServiceContract.csproj">
       <Project>{67D6B6E6-0539-4D20-82A9-08F2FECDB44B}</Project>

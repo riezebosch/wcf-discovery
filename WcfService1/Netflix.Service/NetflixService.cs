@@ -1,4 +1,5 @@
 ﻿using Netflix.DataContracts;
+using Netflix.DataModel;
 using Netflix.ServiceContract;
 using System;
 using System.ServiceModel;
@@ -79,6 +80,15 @@ namespace Netflix.Service
                     serie,
                     new Movie { }
                 };
+        }
+
+        public void Transaction(Guid data)
+        {
+            using (var context = new NetflixModel())
+            {
+                context.People.Add(new Person { Name = data.ToString() });
+                context.SaveChanges();
+            }
         }
     }
 }

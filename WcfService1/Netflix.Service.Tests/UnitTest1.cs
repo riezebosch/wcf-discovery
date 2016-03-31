@@ -11,6 +11,8 @@ using System.Runtime.Serialization;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using System.Transactions;
+using Netflix.DataModel;
 
 namespace Netflix.Service.Tests
 {
@@ -228,6 +230,32 @@ namespace Netflix.Service.Tests
             ((ICommunicationObject)client).Abort();
 
             System.Threading.Thread.Sleep(5000);
+        }
+
+        [TestMethod]
+        public void TransactionFlowVanClientNaarService()
+        {
+            using (var context = new NetflixModel())
+            {
+                context.Database.CreateIfNotExists();
+            }
+
+            var data = Guid.NewGuid();
+            using (new TransactionScope())
+            {
+                client.Transaction(data);
+                PersonExists(data).ShouldBeTrue();
+            }
+
+            PersonExists(data).ShouldBeFalse();
+        }
+
+        private static bool PersonExists(Guid data)
+        {
+            using (var context = new NetflixModel())
+            {
+                return context.People.Any(p => p.Name == data.ToString());
+            }
         }
     }
 }

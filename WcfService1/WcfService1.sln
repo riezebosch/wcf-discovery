@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discovery.Proxy", "Discover
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discovery.Proxy.Tests", "Discovery.Proxy.Tests\Discovery.Proxy.Tests.csproj", "{67F827AA-CDA9-4533-BB5B-58F7B3C5D7C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netflix.DataModel", "Netflix.DataModel\Netflix.DataModel.csproj", "{CDAADE66-386A-4C94-A982-323B3FE25B6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,10 @@ Global
 		{67F827AA-CDA9-4533-BB5B-58F7B3C5D7C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67F827AA-CDA9-4533-BB5B-58F7B3C5D7C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67F827AA-CDA9-4533-BB5B-58F7B3C5D7C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDAADE66-386A-4C94-A982-323B3FE25B6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDAADE66-386A-4C94-A982-323B3FE25B6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDAADE66-386A-4C94-A982-323B3FE25B6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDAADE66-386A-4C94-A982-323B3FE25B6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
