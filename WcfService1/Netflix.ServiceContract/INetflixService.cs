@@ -5,7 +5,7 @@ using System.ServiceModel;
 namespace Netflix.ServiceContract
 {
     [ServiceContract(Namespace = "urn:www-netflix-com:wcf-demo",
-        CallbackContract = typeof(INetflixCallback))]
+        CallbackContract = typeof(INetflixCallback), SessionMode = SessionMode.Required)]
     public interface INetflixService
     {
         [OperationContract]
@@ -28,6 +28,11 @@ namespace Netflix.ServiceContract
         void Search();
 
         [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Mandatory)]
         void Transaction(Guid data);
+
+        [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Mandatory)]
+        void TransactionComplete();
     }
 }

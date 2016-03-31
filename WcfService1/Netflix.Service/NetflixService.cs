@@ -7,8 +7,10 @@ using System.Threading;
 
 namespace Netflix.Service
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall,
-        ConcurrencyMode = ConcurrencyMode.Single)]
+    [ServiceBehavior(
+        InstanceContextMode = InstanceContextMode.PerSession,
+        ConcurrencyMode = ConcurrencyMode.Single,
+        IncludeExceptionDetailInFaults = true)]
     public class NetflixService : INetflixService
     {
         private Guid _data;
@@ -82,6 +84,8 @@ namespace Netflix.Service
                 };
         }
 
+        [OperationBehavior(TransactionScopeRequired = true, 
+            TransactionAutoComplete = false)]
         public void Transaction(Guid data)
         {
             using (var context = new NetflixModel())
@@ -89,6 +93,12 @@ namespace Netflix.Service
                 context.People.Add(new Person { Name = data.ToString() });
                 context.SaveChanges();
             }
+        }
+
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = false)]
+        public void TransactionComplete()
+        {
+            OperationContext.Current.SetTransactionComplete();
         }
     }
 }

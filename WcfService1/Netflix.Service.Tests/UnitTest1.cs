@@ -26,7 +26,7 @@ namespace Netflix.Service.Tests
         {
             host = new ServiceHost(typeof(NetflixService));
             host.AddServiceEndpoint(typeof(INetflixService),
-                new NetNamedPipeBinding(),
+                new NetNamedPipeBinding { TransactionFlow = true },
                 "net.pipe://localhost/netflix");
 
             host.Open();
@@ -52,7 +52,7 @@ namespace Netflix.Service.Tests
         private static INetflixService CreateClient(INetflixCallback callback)
         {
             return DuplexChannelFactory<INetflixService>.CreateChannel(callback,
-                new NetNamedPipeBinding(),
+                new NetNamedPipeBinding { TransactionFlow = true },
                 new EndpointAddress("net.pipe://localhost/netflix"));
         }
 
@@ -256,6 +256,27 @@ namespace Netflix.Service.Tests
             {
                 return context.People.Any(p => p.Name == data.ToString());
             }
+        }
+
+        [TestMethod]
+        public void TransactionFlowVanClientNaarServiceComplete()
+        {
+            using (var context = new NetflixModel())
+            {
+                context.Database.CreateIfNotExists();
+            }
+
+            var data = Guid.NewGuid();
+            using (var scope = new TransactionScope())
+            {
+                client.Transaction(data);
+                PersonExists(data).ShouldBeTrue();
+
+                client.TransactionComplete();
+                scope.Complete();
+            }
+
+            PersonExists(data).ShouldBeTrue();
         }
     }
 }
