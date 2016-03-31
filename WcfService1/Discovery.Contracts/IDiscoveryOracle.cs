@@ -10,7 +10,7 @@ namespace Discovery.Contracts
     [ServiceContract(
         Name = "Oracle",
         Namespace = "urn:www-infosupport-com:wsdiscovery-demo")]
-    public interface DisoveryOracle
+    public interface IDiscoveryOracle
     {
         [OperationContract]
         string Ask(string question);
