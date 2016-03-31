@@ -4,6 +4,7 @@ using System.ServiceModel;
 using Discovery.Contracts;
 using System.ServiceModel.Description;
 using Shouldly;
+using System.ServiceModel.Discovery;
 
 namespace Discovery.Service.Tests
 {
@@ -17,9 +18,13 @@ namespace Discovery.Service.Tests
         {
             host = new ServiceHost(typeof(DiscoveryOracle));
             host.Description.Behaviors.Find<ServiceDebugBehavior>().IncludeExceptionDetailInFaults = true;
+
+            host.Description.Behaviors.Add(new ServiceDiscoveryBehavior());
             host.AddServiceEndpoint(typeof(IDiscoveryOracle),
                 new NetNamedPipeBinding(),
                 "net.pipe://localhost/discovery");
+
+            host.AddServiceEndpoint(new UdpDiscoveryEndpoint());
 
             host.Open();
         }
@@ -41,9 +46,12 @@ namespace Discovery.Service.Tests
 
         private static IDiscoveryOracle CreateClient()
         {
+            var disco = new DiscoveryClient(new UdpDiscoveryEndpoint());
+            var response = disco.Find(new FindCriteria(typeof(IDiscoveryOracle)) { MaxResults = 1 });
+
             return ChannelFactory<IDiscoveryOracle>.CreateChannel(
                 new NetNamedPipeBinding(),
-                new EndpointAddress("net.pipe://localhost/discovery"));
+                response.Endpoints[0].Address);
         }
 
         [TestCleanup]
