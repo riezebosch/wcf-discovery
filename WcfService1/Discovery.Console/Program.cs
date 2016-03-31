@@ -15,22 +15,35 @@ namespace Discovery.Console
         {
             while(true)
             {
-                var client = new OracleClient();
                 try
                 {
-                    var result = client.Ask("random");
-                    WriteLine(result);
+                    var client = new OracleClient();
+                    try
+                    {
+                        var result = client.Ask("random");
+
+                        ForegroundColor = ConsoleColor.White;
+                        Write(result);
+
+                        ForegroundColor = client.InnerChannel.RemoteAddress.Uri.Host == "docenta" ? ConsoleColor.Gray : ConsoleColor.Red;
+                        WriteLine($" ({client.InnerChannel.RemoteAddress})");
+                    }
+                    finally
+                    {
+                        if (client.State == CommunicationState.Opened)
+                        {
+                            client.Close();
+                        }
+                        else
+                        {
+                            client.Abort();
+                        }
+                    }
                 }
-                finally
+                catch (EndpointNotFoundException)
                 {
-                    if (client.State == CommunicationState.Opened)
-                    {
-                        client.Close();
-                    }
-                    else
-                    {
-                        client.Abort();
-                    }
+                    ForegroundColor = ConsoleColor.Red;
+                    WriteLine("Endpoint not found");
                 }
             }
         }

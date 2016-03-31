@@ -5,6 +5,7 @@ using Discovery.Contracts;
 using System.ServiceModel.Description;
 using Shouldly;
 using System.ServiceModel.Discovery;
+using System.Linq;
 
 namespace Discovery.Service.Tests
 {
@@ -47,11 +48,17 @@ namespace Discovery.Service.Tests
         private static IDiscoveryOracle CreateClient()
         {
             var disco = new DiscoveryClient(new UdpDiscoveryEndpoint());
-            var response = disco.Find(new FindCriteria(typeof(IDiscoveryOracle)) { MaxResults = 1 });
+            var response = disco.Find(new FindCriteria(typeof(IDiscoveryOracle)) { MaxResults = 3  });
+
+            // Nu we de service in IIS hebben gedployed reageren er ook opeens services die met een
+            // BasicHttpBinding zijn geconfigureerd waarop onze test stuk gaat omdat die uitgaat van
+            // een NetNamedPipeBinding...
+            var endpoint = response.Endpoints.FirstOrDefault(ep => ep.Address.Uri.Scheme == "net.pipe");
+            endpoint.ShouldNotBeNull();
 
             return ChannelFactory<IDiscoveryOracle>.CreateChannel(
                 new NetNamedPipeBinding(),
-                response.Endpoints[0].Address);
+                endpoint.Address);
         }
 
         [TestCleanup]
