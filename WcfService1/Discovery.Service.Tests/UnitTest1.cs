@@ -48,7 +48,7 @@ namespace Discovery.Service.Tests
         private static IDiscoveryOracle CreateClient()
         {
             var disco = new DiscoveryClient(new UdpDiscoveryEndpoint());
-            var criteria = new FindCriteria(typeof(IDiscoveryOracle)) { MaxResults = 2 };
+            var criteria = new FindCriteria(typeof(IDiscoveryOracle)) { MaxResults = 4 };
             //criteria.Scopes.Add(new Uri("net.pipe://localhost/discovery"));
             //criteria.ScopeMatchBy = FindCriteria.ScopeMatchByLdap;
 

@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MessageInspectorLogger.cs" />
+    <Compile Include="MessageInspectorLoggerBehavior.cs" />
     <Compile Include="NetflixService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

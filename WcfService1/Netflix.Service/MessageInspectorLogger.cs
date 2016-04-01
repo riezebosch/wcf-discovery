@@ -1,11 +1,31 @@
-﻿namespace Netflix.Service
+﻿using System;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
+using System.ServiceModel.Dispatcher;
+
+namespace Netflix.Service
 {
-    public class MessageInspectorLogger
+    public class MessageInspectorLogger : 
+        IDispatchMessageInspector
     {
-        public MessageInspectorLogger()
+        public Action<string> Log { get; set; }
+
+        public object AfterReceiveRequest(ref Message request, IClientChannel channel, InstanceContext instanceContext)
         {
+            if (Log != null)
+            {
+                Log(request.ToString());
+            }
+
+            return null;
         }
 
-        public System.Action<string> Log { get; set; }
+        public void BeforeSendReply(ref Message reply, object correlationState)
+        {
+            if (Log != null)
+            {
+                Log(reply.ToString());
+            }
+        }
     }
 }

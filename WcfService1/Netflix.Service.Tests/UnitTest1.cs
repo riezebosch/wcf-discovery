@@ -29,6 +29,8 @@ namespace Netflix.Service.Tests
                 new NetNamedPipeBinding { TransactionFlow = true },
                 "net.pipe://localhost/netflix");
 
+            host.Description.Behaviors.Add(new MessageInspectorLoggerBehavior(inspector));
+
             host.Open();
         }
 
@@ -279,13 +281,16 @@ namespace Netflix.Service.Tests
             PersonExists(data).ShouldBeTrue();
         }
 
-        MessageInspectorLogger inspector = new MessageInspectorLogger();
+        static MessageInspectorLogger inspector = new MessageInspectorLogger();
 
         [TestMethod]
         public void MessageInspectorLogsIncomingAndOutgoingMessages()
         {
             var messages = new List<string>();
             inspector.Log = (m) => messages.Add(m);
+            inspector.Log += Console.WriteLine;
+
+            client.Top10();
 
             messages.Count().ShouldBeGreaterThan(0);
         }
