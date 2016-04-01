@@ -278,5 +278,16 @@ namespace Netflix.Service.Tests
 
             PersonExists(data).ShouldBeTrue();
         }
+
+        MessageInspectorLogger inspector = new MessageInspectorLogger();
+
+        [TestMethod]
+        public void MessageInspectorLogsIncomingAndOutgoingMessages()
+        {
+            var messages = new List<string>();
+            inspector.Log = (m) => messages.Add(m);
+
+            messages.Count().ShouldBeGreaterThan(0);
+        }
     }
 }
