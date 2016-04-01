@@ -39,6 +39,10 @@ namespace Discovery.Console
                         ForegroundColor = client.InnerChannel.RemoteAddress.Uri.Host == "docenta" ? ConsoleColor.Gray : ConsoleColor.Green;
                         WriteLine($" ({client.InnerChannel.RemoteAddress})");
                     }
+                    catch (Exception ex) when (ex.InnerException is FaultException)
+                    {
+                        WriteError($"{ex.InnerException.Message}", client);
+                    }
                     catch (Exception ex)
                     {
                         WriteError(ex.Message, client);
