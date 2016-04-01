@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
+using System.ServiceModel.Security;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
@@ -18,6 +20,15 @@ namespace Discovery.Console
                 try
                 {
                     var client = new OracleClient();
+                    client
+                        .ClientCredentials
+                        .UserName
+                        .UserName = "discovery";
+                    client
+                        .ClientCredentials
+                        .UserName
+                        .Password = "tesla";
+
                     try
                     {
                         var result = client.Ask("random");
@@ -25,8 +36,12 @@ namespace Discovery.Console
                         ForegroundColor = ConsoleColor.White;
                         Write(result);
 
-                        ForegroundColor = client.InnerChannel.RemoteAddress.Uri.Host == "docenta" ? ConsoleColor.Gray : ConsoleColor.Red;
+                        ForegroundColor = client.InnerChannel.RemoteAddress.Uri.Host == "docenta" ? ConsoleColor.Gray : ConsoleColor.Green;
                         WriteLine($" ({client.InnerChannel.RemoteAddress})");
+                    }
+                    catch (Exception ex)
+                    {
+                        WriteError(ex.Message, client);
                     }
                     finally
                     {
@@ -42,10 +57,21 @@ namespace Discovery.Console
                 }
                 catch (EndpointNotFoundException)
                 {
-                    ForegroundColor = ConsoleColor.Red;
-                    WriteLine("Endpoint not found");
+                    WriteError("Endpoint not found");
                 }
+               
             }
+        }
+
+        private static void WriteError(string error)
+        {
+            ForegroundColor = ConsoleColor.Red;
+            WriteLine(error);
+        }
+
+        private static void WriteError(string error, OracleClient client)
+        {
+            WriteError($"{error} from {client.InnerChannel.RemoteAddress.Uri.Host}");
         }
     }
 }

@@ -17,7 +17,7 @@
     <AssemblyName>Discovery.Host</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44300</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -76,7 +76,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,6 +87,10 @@
     <ProjectReference Include="..\Discovery.Contracts\Discovery.Contracts.csproj">
       <Project>{ef6e3904-e2e9-4b04-9437-b59612ef4939}</Project>
       <Name>Discovery.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Discovery.Host.Security\Discovery.Host.Security.csproj">
+      <Project>{136b5e0d-f3d5-4259-85dd-6058d7711338}</Project>
+      <Name>Discovery.Host.Security</Name>
     </ProjectReference>
     <ProjectReference Include="..\Discovery.Service\Discovery.Service.csproj">
       <Project>{ff1029da-2256-4a9d-8995-4d3f9ff97232}</Project>
